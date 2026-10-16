@@ -99,6 +99,22 @@ files = [
 ]
 
 [[package]]
+name = "asttokens"
+version = "3.0.2"
+description = "Annotate AST trees with source code positions"
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "asttokens-3.0.2-py3-none-any.whl", hash = "sha256:9da13157f5b28becde0bd374fc677dcd3c290614264eff096f167c469cd9f933"},
+    {file = "asttokens-3.0.2.tar.gz", hash = "sha256:3ecdbd8f2cc195f53ccada3a613538bb5f9ef6f6869129f13e03c30a677b8fe2"},
+]
+
+[package.extras]
+astroid = ["astroid (>=2,<5)"]
+test = ["astroid (>=2,<5)", "pytest (<9.0)", "pytest-cov", "pytest-xdist"]
+
+[[package]]
 name = "attrs"
 version = "26.1.0"
 description = "Classes Without Boilerplate"
@@ -420,6 +436,21 @@ files = [
 ]
 
 [[package]]
+name = "executing"
+version = "2.3.0"
+description = "Get the currently executing AST node of a frame, and other information"
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "executing-2.3.0-py3-none-any.whl", hash = "sha256:736e859c9f8701f11fcf516856f26f562e04776387824b43a35a1dfe21c84122"},
+    {file = "executing-2.3.0.tar.gz", hash = "sha256:15919cb5d667e5cb4e099511971d00d659573fff2dd5c4e6cd8b71636c7858d2"},
+]
+
+[package.extras]
+tests = ["asttokens (>=2.1.0)", "coverage-enable-subprocess", "coverage[toml]", "ipython", "littleutils", "pysource-minimize (>=0.10.1)", "pytest", "rich ; python_version >= \"3.11\""]
+
+[[package]]
 name = "flake8"
 version = "7.3.0"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -650,6 +681,29 @@ files = [
     {file = "iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"},
     {file = "iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730"},
 ]
+
+[[package]]
+name = "inline-snapshot"
+version = "0.36.1"
+description = "golden master/snapshot/approval testing library which puts the values right into your source code"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "inline_snapshot-0.36.1-py3-none-any.whl", hash = "sha256:9d795198efcf956670a8ed588c85708dd3575a08341c63e2b34745a2ba0c6245"},
+    {file = "inline_snapshot-0.36.1.tar.gz", hash = "sha256:ff57828c691eaafe03426de25f2c21a1e382905dcbe110934df862297e8c5f8a"},
+]
+
+[package.dependencies]
+asttokens = ">=2.0.5"
+executing = ">=2.2.0"
+pytest = ">=8.3.4"
+rich = ">=13.7.1"
+typing-extensions = "*"
+
+[package.extras]
+black = ["black (>=23.3.0)"]
+dirty-equals = ["dirty-equals (>=0.9.0)"]
 
 [[package]]
 name = "jinja2"
@@ -1693,4 +1747,4 @@ pygments = ">=2.19,<3.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14,<4"
-content-hash = "1007e18db150bed34c963e434065cffa026b2b7f0b8294d4088e8404005d4036"
+content-hash = "a83ae837e8ddad29b9d2f99a29ac276c33ab09d884558337a1678c8bab100e64"

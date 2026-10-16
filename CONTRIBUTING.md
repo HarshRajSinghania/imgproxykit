@@ -30,7 +30,7 @@ To run linting:
 make lint
 ```
 
-To check types, including the public API assertions in `typesafety/`:
+To check types:
 
 ```bash
 make type-check

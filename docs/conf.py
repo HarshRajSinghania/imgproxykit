@@ -15,8 +15,8 @@ import tomllib
 from pathlib import Path
 from typing import cast
 
-# We need `server` to be importable from here:
-_ROOT = Path('..').resolve(strict=True)
+# We need `imgproxykit` to be importable from here:
+_ROOT = Path(__file__).resolve(strict=True).parent.parent
 sys.path.insert(0, str(_ROOT))
 
 
@@ -27,7 +27,7 @@ def _get_project_meta() -> dict[str, str]:
     pyproject = _ROOT / 'pyproject.toml'
     return cast(
         dict[str, str],
-        tomllib.loads(pyproject.read_text())['tool']['poetry'],
+        tomllib.loads(pyproject.read_text())['project'],
     )
 
 

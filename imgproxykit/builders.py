@@ -105,13 +105,14 @@ class PathBuilder:
 
         """
         self._validate_options(transform, presets, output_format)
-
+        # TODO: serializers as classvar
         if presets is not EMPTY:
             return (serialize_segment(PRESET, presets),), output_format
 
         if transform is EMPTY:
             return (), EMPTY
 
+        # TODO: serializers as classvar
         return (
             tuple(serialize_option(option) for option in transform.options),
             transform.format,
