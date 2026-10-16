@@ -2,21 +2,12 @@ version: 2
 
 build:
   os: ubuntu-lts-latest
-  tools: {python: "3.14"}
+  tools:
+    python: "3.14"
   jobs:
-    pre_create_environment:
-      - asdf plugin add poetry
-      - asdf install poetry latest
-      - asdf global poetry latest
-      - poetry config virtualenvs.create false
-      - poetry self add poetry-plugin-export
-      - poetry export --only main --only docs --format=requirements.txt --output=requirements.txt
-
-python:
-  install:
-    - requirements: requirements.txt
-    - method: pip
-      path: .
+    post_install:
+      - pip install poetry==2.5.1
+      - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH poetry install --only main,docs
 
 sphinx:
   configuration: 'docs/conf.py'

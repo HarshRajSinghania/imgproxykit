@@ -1,3 +1,6 @@
+# TODO: Add integration tests with local images: signed transforms, output
+# dimensions and formats, presets, omitted arguments, and invalid signatures.
+# Provide a local command and run the suite in CI.
 services:
   imgproxy:
     image: ghcr.io/imgproxy/imgproxy:v3.29.0

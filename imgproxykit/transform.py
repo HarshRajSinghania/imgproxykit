@@ -48,5 +48,7 @@ class Transform:
 
     """
 
+    # TODO: Add immutable composition; define duplicate option handling,
+    # format overrides, and explicitly clearing an inherited format.
     options: tuple[Option, ...] = ()
     format: FormatType | EMPTY = EMPTY

@@ -17,6 +17,8 @@ lint: ## Run linting checks (ruff, flake8, slotscheck, import-linter)
 	$(POETRY) run slotscheck -v -m imgproxykit
 	$(POETRY) run lint-imports
 
+# TODO: Add accepted and rejected public API typing examples for mypy and
+# Pyright: credentials, exclusive URL arguments, formats, and option types.
 .PHONY: type-check
 type-check: ## Run mypy, Pyright and Pyrefly, including public API type tests
 	$(POETRY) run mypy .

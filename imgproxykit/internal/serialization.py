@@ -16,6 +16,9 @@ def serialize_segment(name: str, arguments: tuple[Argument, ...]) -> str:
     retain their positions. Booleans are serialized as ``1`` and ``0``.
 
     """
+    # TODO: Verify reserved characters in string arguments and preset names
+    # against imgproxy before choosing encoding or rejection. Cover colons,
+    # slashes, percent signs, Unicode, and empty strings.
     end = len(arguments)
     while end and arguments[end - 1] is EMPTY:
         end -= 1

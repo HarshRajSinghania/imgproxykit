@@ -23,6 +23,10 @@ class Option(ABC):
 
     __slots__ = ()
 
+    # TODO: Define runtime validation boundaries for processing option values.
+    # TODO: Allow custom option names without type ignores; decide whether
+    # OptionType should remain limited to built-in processing options.
+
     # Private API:
     _name: ClassVar[OptionType]
 

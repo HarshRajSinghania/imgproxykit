@@ -79,6 +79,7 @@ class Client:
         The signing credentials above are examples for local development.
 
         """
+        # TODO: Define runtime validation for base URLs and empty sources.
         self._base_url = base_url.rstrip('/')
         self._path_builder = self.path_builder_cls()
         self._signer = self.signer_cls(key=key, salt=salt)
