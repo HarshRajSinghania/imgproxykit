@@ -1,0 +1,235 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [ "poetry-core>=2" ]
+
+
+[tool.poetry]
+name = "imgproxykit"
+version = "0.1.0"
+description = "A Pythonic toolkit for effortless imgproxy URL generation and image transformations"
+license = "MIT"
+authors = [
+  "Alexander Kondratev",
+]
+readme = "README.md"
+repository = "https://github.com/kondratevdev/imgproxykit"
+keywords = [
+  "wemake-python-package",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python = "^3.14"
+typing-extensions = "^4.16"
+
+[tool.poetry.group.dev.dependencies]
+covdefaults = "^2.3"
+import-linter = ">=2.5,<3"
+mypy = "^2.4"
+pyright = ">=1.1,<2"
+pytest = "^9.1"
+pytest-cov = "^6.3"
+pytest-randomly = "^4.1"
+ruff = "^0.17"
+slotscheck = ">=0.19,<0.22"
+wemake-python-styleguide = "^1.7"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+furo = "^2025.12"
+myst-parser = "^5.1"
+sphinx = "^9.0"
+sphinx-autodoc-typehints = "^3.0"
+
+
+[tool.ruff]
+target-version = "py314"
+line-length = 80
+# Ruff config: https://docs.astral.sh/ruff/settings
+preview = true
+fix = true
+output-prefer-rule-codes = true
+
+[tool.ruff.format]
+quote-style = "single"
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+  "A",     # flake8-builtins
+  "ASYNC", # flake8-async
+  "B",     # flake8-bugbear
+  "C4",    # flake8-comprehensions
+  "C90",   # maccabe
+  "COM",   # flake8-commas
+  "D",     # pydocstyle
+  "DTZ",   # flake8-datetimez
+  "E",     # pycodestyle
+  "ERA",   # flake8-eradicate
+  "EXE",   # flake8-executable
+  "F",     # pyflakes
+  "FBT",   # flake8-boolean-trap
+  "FLY",   # pyflint
+  "FURB",  # refurb
+  "G",     # flake8-logging-format
+  "I",     # isort
+  "ICN",   # flake8-import-conventions
+  "ISC",   # flake8-implicit-str-concat
+  "LOG",   # flake8-logging
+  "N",     # pep8-naming
+  "PERF",  # perflint
+  "PIE",   # flake8-pie
+  "PL",    # pylint
+  "PT",    # flake8-pytest-style
+  "PTH",   # flake8-use-pathlib
+  "Q",     # flake8-quotes
+  "RET",   # flake8-return
+  "RSE",   # flake8-raise
+  "RUF",   # ruff
+  "S",     # flake8-bandit
+  "SIM",   # flake8-simpify
+  "SLF",   # flake8-self
+  "SLOT",  # flake8-slots
+  "T100",  # flake8-debugger
+  "TRY",   # tryceratops
+  "UP",    # pyupgrade
+  "W",     # pycodestyle
+  "YTT",   # flake8-2020
+]
+ignore = [
+  "A005",    # allow to shadow stdlib and builtin module names
+  "COM812",  # trailing comma, conflicts with `ruff format`
+  # Different doc rules that we don't really care about:
+  "D100",
+  "D104",
+  "D106",
+  "D203",
+  "D212",
+  "D401",
+  "D404",
+  "D405",
+  "D418",    # We should be able to add docstrings to `@overload` decorators
+  "ISC001",  # implicit string concat conflicts with `ruff format`
+  "ISC003",  # prefer explicit string concat over implicit concat
+  "PLR09",   # we have our own complexity rules
+  "PLR2004", # do not report magic numbers
+  "PLR6301", # do not require classmethod / staticmethod when self not used
+  "RUF105",  # keep old `# noqa` comments style, not `# ruff` comments
+  "RUF106",  # we prefer old error codes
+  "RUF201",  # keep old rule codes instead of verbose names
+  "TRY003",  # long exception messages from `tryceratops`
+]
+external = [ "WPS" ]
+# Plugin configs:
+flake8-quotes.inline-quotes = "single"
+mccabe.max-complexity = 6
+pydocstyle.convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [ "S101" ]
+
+
+[tool.codespell]
+# codespell configuration: https://github.com/codespell-project/codespell
+skip = [
+  "*.lock",
+  ".mypy_cache",
+  "__pycache__",
+  "_build",
+]
+
+
+[tool.pyproject-fmt]
+# Docs: https://pyproject-fmt.readthedocs.io/en/latest/configuration.html
+column_width = 80
+generate_python_version_classifiers = false
+table_format = "long"
+sub_table_spacing = "\n"
+separate_root_table = "\n\n"
+
+
+[tool.typos.files]
+# typos configuration: https://github.com/crate-ci/typos/
+extend-exclude = [
+  "__pycache__",
+  "_build",
+  ".mypy_cache",
+  "*.lock",
+]
+
+
+[tool.mypy]
+warn_unreachable = true
+enable_error_code = [
+  "deprecated",
+  "exhaustive-match",
+  "explicit-override",
+  "ignore-without-code",
+  "mutable-override",
+  "possibly-undefined",
+  "redundant-expr",
+  "redundant-self",
+  "truthy-bool",
+  "truthy-iterable",
+  "unimported-reveal",
+  "unused-awaitable",
+]
+strict_equality_for_none = true
+# The mypy configurations: http://bit.ly/2zEl9WI
+extra_checks = true
+strict = true
+
+
+[tool.pytest.ini_options]
+# pytest config: http://doc.pytest.org/en/latest/customize.html
+# Strict `@xfail` by default:
+xfail_strict = true
+# Fail on warnings:
+filterwarnings = [ "error" ]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+  "--doctest-modules",
+  # Output:
+  "--tb=short",
+  # Coverage:
+  "--cov=imgproxykit",
+  "--cov=tests",
+  "--cov-report=term-missing:skip-covered",
+  "--cov-report=html",
+  "--cov-report=xml",
+  "--cov-branch",
+  "--cov-fail-under=100",
+  # Ignores:
+  "--ignore=docs",
+  "--ignore=typesafety",
+]
+
+
+[tool.coverage.run]
+# Covdefaults: https://pypi.org/project/covdefaults
+plugins = [ "covdefaults" ]
+
+
+[tool.pyright]
+venv = ".venv"
+venvPath = "."
+pythonVersion = "3.14"
+typeCheckingMode = "strict"
+# Older basedpyright versions gate PEP 661 sentinels behind this flag.
+enableExperimentalFeatures = true
+reportUnnecessaryTypeIgnoreComment = "error"
+enableTypeIgnoreComments = false
+include = [ "imgproxykit", "tests", "typesafety" ]
+
+
+[tool.slotscheck]
+strict-imports = true
+require-subclass = true

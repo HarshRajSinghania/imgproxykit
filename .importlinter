@@ -1,0 +1,17 @@
+[importlinter]
+root_package = imgproxykit
+include_external_packages = True
+exclude_type_checking_imports = True
+
+[importlinter:contract:layers]
+name = URL construction layers
+type = layers
+containers = imgproxykit
+layers =
+  client
+  builders | signing
+  internal.urls
+  transform
+  options
+  types
+  internal.empty
