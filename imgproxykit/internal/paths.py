@@ -1,12 +1,12 @@
 from imgproxykit.internal.encoding import encode_base64
-from imgproxykit.types import EMPTY
+from imgproxykit.types import EMPTY, FormatType
 
 
 def build_path(
     source: str,
     *,
     options: tuple[str, ...],
-    output_format: str | EMPTY = EMPTY,
+    output_format: FormatType | EMPTY = EMPTY,
 ) -> str:
     """
     Assemble serialized options, an encoded source, and an output extension.

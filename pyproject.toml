@@ -3,29 +3,45 @@ build-backend = "poetry.core.masonry.api"
 requires = [ "poetry-core>=2" ]
 
 
-[tool.poetry]
+[project]
 name = "imgproxykit"
 version = "0.1.0"
-description = "A Pythonic toolkit for effortless imgproxy URL generation and image transformations"
+description = "A typed Python toolkit for building imgproxy URLs"
 license = "MIT"
 authors = [
-  "Alexander Kondratev",
+  { name = "Alexander Kondratev", email = "mail@kondratev.dev" },
 ]
 readme = "README.md"
-repository = "https://github.com/kondratevdev/imgproxykit"
+requires-python = ">=3.14,<4"
+dynamic = [ "classifiers" ]
 keywords = [
-  "wemake-python-package",
+  "imgproxy",
+  "images",
+  "image-processing",
+  "url-builder",
+  "image-transformation",
 ]
+dependencies = [
+  "typing-extensions>=4.16,<5",
+]
+
+[project.urls]
+GitHub = "https://github.com/kondratevdev/imgproxykit"
+Issues = "https://github.com/kondratevdev/imgproxykit/issues"
+Changelog = "https://github.com/kondratevdev/imgproxykit/releases"
+
+
+[tool.poetry]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
   "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
 ]
-
-[tool.poetry.dependencies]
-python = "^3.14"
-typing-extensions = "^4.16"
 
 [tool.poetry.group.dev.dependencies]
 covdefaults = "^2.3"

@@ -5,7 +5,7 @@ from imgproxykit.internal.serialization import (
     serialize_segment,
 )
 from imgproxykit.transform import Transform
-from imgproxykit.types import EMPTY
+from imgproxykit.types import EMPTY, FormatType
 
 
 class PathBuilder:
@@ -33,7 +33,7 @@ class PathBuilder:
         *,
         transform: Transform | EMPTY = EMPTY,
         presets: tuple[str, ...] | EMPTY = EMPTY,
-        output_format: str | EMPTY = EMPTY,
+        output_format: FormatType | EMPTY = EMPTY,
     ) -> str:
         """
         Build a path from a Python transform or server preset names.
@@ -94,8 +94,8 @@ class PathBuilder:
         self,
         transform: Transform | EMPTY,
         presets: tuple[str, ...] | EMPTY,
-        output_format: str | EMPTY,
-    ) -> tuple[tuple[str, ...], str | EMPTY]:
+        output_format: FormatType | EMPTY,
+    ) -> tuple[tuple[str, ...], FormatType | EMPTY]:
         """
         Resolve mutually exclusive inputs into path segments and a format.
 
@@ -121,7 +121,7 @@ class PathBuilder:
         self,
         transform: Transform | EMPTY,
         presets: tuple[str, ...] | EMPTY,
-        output_format: str | EMPTY,
+        output_format: FormatType | EMPTY,
     ) -> None:
         """
         Validate processing options before path serialization.

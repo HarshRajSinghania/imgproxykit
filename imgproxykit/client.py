@@ -3,7 +3,7 @@ from typing import ClassVar, overload
 from imgproxykit.builders import PathBuilder
 from imgproxykit.signing import URLSigner
 from imgproxykit.transform import Transform
-from imgproxykit.types import EMPTY
+from imgproxykit.types import EMPTY, FormatType
 
 
 class Client:
@@ -100,7 +100,7 @@ class Client:
         source: str,
         *,
         presets: tuple[str, ...],
-        format: str | EMPTY = EMPTY,
+        format: FormatType | EMPTY = EMPTY,
     ) -> str: ...
 
     def url(
@@ -109,7 +109,7 @@ class Client:
         *,
         transform: Transform | EMPTY = EMPTY,
         presets: tuple[str, ...] | EMPTY = EMPTY,
-        format: str | EMPTY = EMPTY,  # noqa: A002
+        format: FormatType | EMPTY = EMPTY,  # noqa: A002
     ) -> str:
         """
         Build a URL for one source using a transform or server presets.
