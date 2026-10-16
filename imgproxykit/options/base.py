@@ -23,7 +23,9 @@ class Option(ABC):
 
     __slots__ = ()
 
-    # TODO: Define runtime validation boundaries for processing option values.
+    # TODO: Validate server-independent option constraints at construction
+    # time (for example, rotation multiples of 90 and positive zoom factors).
+    # Leave configuration-dependent restrictions to the imgproxy server.
     # TODO: Allow custom option names without type ignores; decide whether
     # OptionType should remain limited to built-in processing options.
 

@@ -68,9 +68,9 @@ type WatermarkPosition = Literal[
     'ea',
     'we',
     'noea',
-    'now',
+    'nowe',
     'soea',
-    'sow',
+    'sowe',
     're',
 ]
 type ResizeType = Literal[
@@ -86,9 +86,9 @@ type Position = Literal[
     'ea',
     'we',
     'noea',
-    'now',
+    'nowe',
     'soea',
-    'sow',
+    'sowe',
     'ce',
     'sm',
     'fp',

@@ -27,8 +27,8 @@ def image_fixtures() -> Path:
 @pytest.fixture(scope='session')
 def imgproxy_image() -> str:
     """Return the pinned imgproxy image used by integration tests."""
-    # Flip requires imgproxy 3.31; pin the version for repeatable tests.
-    return 'ghcr.io/imgproxy/imgproxy:v3.31.0'
+    # PreserveHDR requires imgproxy 4; pin the version for repeatable tests.
+    return 'ghcr.io/imgproxy/imgproxy:v4.0.0'
 
 
 @pytest.fixture
@@ -49,11 +49,13 @@ def imgproxy_url(
     # Copying the directory preserves its name: /data/fixtures/*.png.
     # local:/// URLs read these files without an external image server.
     container = (
-        DockerContainer(imgproxy_image)
+        DockerContainer(imgproxy_image)  # noqa: WPS221
         .with_exposed_ports(_PORT)
         .with_env('IMGPROXY_KEY', _KEY)
         .with_env('IMGPROXY_SALT', _SALT)
         .with_env('IMGPROXY_LOCAL_FILESYSTEM_ROOT', '/data/fixtures')
+        .with_env('IMGPROXY_WATERMARK_PATH', '/data/fixtures/transparent.png')
+        .with_env('IMGPROXY_ALLOW_SECURITY_OPTIONS', 'true')
         .with_copy_into_container(image_fixtures, '/data')
     )
     # Different sizes make preset ordering observable in the resulting image.
