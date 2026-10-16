@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MinWidth(Option):
-    """Set the minimum resulting width in pixels."""
+    """
+    Set the minimum resulting width in pixels.
+
+    Combining this option with a target width can crop the result.
+
+    Attributes:
+        value: Minimum resulting width in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        MinWidth(value=300)
+
+    See `imgproxy min width
+    <https://docs.imgproxy.net/usage/processing#min-width>`_.
+
+    """
 
     value: int
 

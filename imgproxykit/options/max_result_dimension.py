@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MaxResultDimension(Option):
-    """Override output dimension limit; requires ALLOW_SECURITY_OPTIONS."""
+    """
+    Override output dimension limit; requires ALLOW_SECURITY_OPTIONS.
+
+    Overrides the corresponding server limit for this request. Requires
+    ``IMGPROXY_ALLOW_SECURITY_OPTIONS=true`` on the imgproxy server.
+
+    Attributes:
+        value: Maximum resulting width or height in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        MaxResultDimension(value=4096)
+
+    See `imgproxy max result dimension
+    <https://docs.imgproxy.net/usage/processing#max-result-dimension>`_.
+
+    """
 
     value: int
 

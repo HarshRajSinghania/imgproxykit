@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Enlarge(Option):
-    """Allow upscaling smaller source images."""
+    """
+    Allow upscaling smaller source images.
+
+    Allows imgproxy to upscale sources smaller than the target dimensions.
+
+    Attributes:
+        value: Whether smaller source images may be enlarged.
+
+    Usage:
+
+    .. code:: python
+
+        Enlarge(value=True)
+
+    See `imgproxy enlarge
+    <https://docs.imgproxy.net/usage/processing#enlarge>`_.
+
+    """
 
     value: bool
 

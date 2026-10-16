@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Rotate(Option):
-    """Rotate clockwise by a multiple of 90 degrees."""
+    """
+    Rotate clockwise by a multiple of 90 degrees.
+
+    Rotation follows EXIF orientation unless automatic rotation is disabled.
+
+    Attributes:
+        value: Clockwise angle in degrees; must be a multiple of 90.
+
+    Usage:
+
+    .. code:: python
+
+        Rotate(value=90)
+
+    See `imgproxy rotate
+    <https://docs.imgproxy.net/usage/processing#rotate>`_.
+
+    """
 
     value: int
 

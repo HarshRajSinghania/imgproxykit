@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MaxAnimationFrameResolution(Option):
-    """Override frame megapixel limit; requires ALLOW_SECURITY_OPTIONS."""
+    """
+    Override frame megapixel limit; requires ALLOW_SECURITY_OPTIONS.
+
+    Overrides the corresponding server limit for this request. Requires
+    ``IMGPROXY_ALLOW_SECURITY_OPTIONS=true`` on the imgproxy server.
+
+    Attributes:
+        value: Animation frame resolution limit in megapixels.
+
+    Usage:
+
+    .. code:: python
+
+        MaxAnimationFrameResolution(value=20)
+
+    See `imgproxy max animation frame resolution
+    <https://docs.imgproxy.net/usage/processing#max-animation-frame-resolution>`_.
+
+    """
 
     value: float
 

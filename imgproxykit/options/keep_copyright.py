@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class KeepCopyright(Option):
-    """Preserve copyright information when stripping metadata."""
+    """
+    Preserve copyright information when stripping metadata.
+
+    Applies when metadata is being stripped from the output image.
+
+    Attributes:
+        value: Whether to retain copyright metadata.
+
+    Usage:
+
+    .. code:: python
+
+        KeepCopyright(value=True)
+
+    See `imgproxy keep copyright
+    <https://docs.imgproxy.net/usage/processing#keep-copyright>`_.
+
+    """
 
     value: bool
 

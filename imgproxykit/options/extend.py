@@ -8,7 +8,28 @@ from imgproxykit.types import EMPTY, Argument, OptionType, Position
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Extend(Option):
-    """Extend the canvas to the target size using an optional gravity."""
+    """
+    Extend the canvas to the target dimensions.
+
+    Omitted settings remain :data:`~imgproxykit.types.EMPTY`. The default
+    anchor is center without offsets; smart gravity is unsupported.
+
+    Attributes:
+        value: Whether canvas extension is enabled.
+        gravity: Canvas anchor, such as ``ce``, ``so``, or ``fp``.
+        offset_x: Horizontal gravity offset or focus X coordinate.
+        offset_y: Vertical gravity offset or focus Y coordinate.
+
+    Usage:
+
+    .. code:: python
+
+        Extend(value=True, gravity='so')
+
+    See `imgproxy extend
+    <https://docs.imgproxy.net/usage/processing#extend>`_.
+
+    """
 
     value: bool
     gravity: Position | EMPTY = EMPTY

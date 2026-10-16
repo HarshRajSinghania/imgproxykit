@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class EnforceThumbnail(Option):
-    """Use an embedded HEIC or AVIF thumbnail when available."""
+    """
+    Use an embedded HEIC or AVIF thumbnail when available.
+
+    Uses the embedded thumbnail instead of the main source image
+    when available. Supported for HEIC and AVIF sources.
+
+    Attributes:
+        value: Whether to prefer an embedded thumbnail.
+
+    Usage:
+
+    .. code:: python
+
+        EnforceThumbnail(value=True)
+
+    See `imgproxy enforce thumbnail
+    <https://docs.imgproxy.net/usage/processing#enforce-thumbnail>`_.
+
+    """
 
     value: bool
 

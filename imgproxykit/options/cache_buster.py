@@ -9,7 +9,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class CacheBuster(Option):
-    """Add an escaped version string to the signed URL to bypass caches."""
+    """
+    Add an escaped version string to the signed URL to bypass caches.
+
+    Changing the value produces a new URL for browser and CDN caches
+    without changing image processing. Special characters are escaped.
+
+    Attributes:
+        value: Cache version string included in the signed path.
+
+    Usage:
+
+    .. code:: python
+
+        CacheBuster(value='v2')
+
+    See `imgproxy cache buster
+    <https://docs.imgproxy.net/usage/processing#cache-buster>`_.
+
+    """
 
     value: str
 

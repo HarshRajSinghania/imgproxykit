@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MinHeight(Option):
-    """Set the minimum resulting height in pixels."""
+    """
+    Set the minimum resulting height in pixels.
+
+    Combining this option with a target height can crop the result.
+
+    Attributes:
+        value: Minimum resulting height in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        MinHeight(value=200)
+
+    See `imgproxy min height
+    <https://docs.imgproxy.net/usage/processing#min-height>`_.
+
+    """
 
     value: int
 

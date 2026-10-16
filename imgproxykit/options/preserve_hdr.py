@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class PreserveHDR(Option):
-    """Preserve high bit depth instead of converting to 8 bit."""
+    """
+    Preserve high bit depth instead of converting to 8 bit.
+
+    Overrides the server high bit depth setting for this request.
+
+    Attributes:
+        value: Whether to retain high bit depth instead of using 8 bit.
+
+    Usage:
+
+    .. code:: python
+
+        PreserveHDR(value=True)
+
+    See `imgproxy preserve hdr
+    <https://docs.imgproxy.net/usage/processing#preserve-hdr>`_.
+
+    """
 
     value: bool
 

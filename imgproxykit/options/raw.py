@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Raw(Option):
-    """Stream the unchecked source file without processing."""
+    """
+    Stream the unchecked source file without processing.
+
+    Streams the source without checking its type, resolution, or size.
+    The output is not transformed.
+
+    Attributes:
+        value: Whether to stream the raw source file.
+
+    Usage:
+
+    .. code:: python
+
+        Raw(value=True)
+
+    See `imgproxy raw
+    <https://docs.imgproxy.net/usage/processing#raw>`_.
+
+    """
 
     value: bool
 

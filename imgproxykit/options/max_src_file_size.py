@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MaxSrcFileSize(Option):
-    """Override source byte limit; requires ALLOW_SECURITY_OPTIONS."""
+    """
+    Override source byte limit; requires ALLOW_SECURITY_OPTIONS.
+
+    Overrides the corresponding server limit for this request. Requires
+    ``IMGPROXY_ALLOW_SECURITY_OPTIONS=true`` on the imgproxy server.
+
+    Attributes:
+        value: Source file size limit in bytes.
+
+    Usage:
+
+    .. code:: python
+
+        MaxSrcFileSize(value=10_000_000)
+
+    See `imgproxy max src file size
+    <https://docs.imgproxy.net/usage/processing#max-src-file-size>`_.
+
+    """
 
     value: int
 

@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Height(Option):
-    """Set the target height in pixels."""
+    """
+    Set the target height in pixels.
+
+    Zero lets imgproxy calculate height from width and aspect ratio.
+    With force resizing, zero preserves the source height.
+
+    Attributes:
+        value: Target height in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        Height(value=200)
+
+    See `imgproxy height
+    <https://docs.imgproxy.net/usage/processing#height>`_.
+
+    """
 
     value: int
 

@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MaxAnimationFrames(Option):
-    """Override animation frame limit; requires ALLOW_SECURITY_OPTIONS."""
+    """
+    Override animation frame limit; requires ALLOW_SECURITY_OPTIONS.
+
+    Overrides the corresponding server limit for this request. Requires
+    ``IMGPROXY_ALLOW_SECURITY_OPTIONS=true`` on the imgproxy server.
+
+    Attributes:
+        value: Maximum number of animation frames.
+
+    Usage:
+
+    .. code:: python
+
+        MaxAnimationFrames(value=100)
+
+    See `imgproxy max animation frames
+    <https://docs.imgproxy.net/usage/processing#max-animation-frames>`_.
+
+    """
 
     value: int
 

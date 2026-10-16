@@ -8,7 +8,28 @@ from imgproxykit.types import EMPTY, Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Size(Option):
-    """Set target dimensions, upscaling, and canvas extension."""
+    """
+    Set target dimensions, upscaling, and canvas extension.
+
+    Values left as :data:`~imgproxykit.types.EMPTY` are not supplied
+    explicitly; imgproxy resolves their defaults.
+
+    Attributes:
+        width: Target width in pixels.
+        height: Target height in pixels.
+        enlarge: Allow upscaling smaller source images.
+        extend: Pad images smaller than the target dimensions.
+
+    Usage:
+
+    .. code:: python
+
+        Size(width=300, height=200, enlarge=True)
+
+    See `imgproxy size
+    <https://docs.imgproxy.net/usage/processing#size>`_.
+
+    """
 
     width: int | EMPTY = EMPTY
     height: int | EMPTY = EMPTY

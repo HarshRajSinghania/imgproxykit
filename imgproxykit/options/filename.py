@@ -9,7 +9,26 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Filename(Option):
-    """Set the response filename using URL-safe Base64 encoding."""
+    """
+    Set the response filename using URL-safe Base64 encoding.
+
+    Sets the filename in the Content-Disposition response header.
+    The name is encoded as URL-safe Base64 automatically. Combine with
+    ReturnAttachment to request downloading in the browser.
+
+    Attributes:
+        value: Response filename, supplied as unencoded text.
+
+    Usage:
+
+    .. code:: python
+
+        Filename(value='product photo.jpg')
+
+    See `imgproxy filename
+    <https://docs.imgproxy.net/usage/processing#filename>`_.
+
+    """
 
     value: str
 

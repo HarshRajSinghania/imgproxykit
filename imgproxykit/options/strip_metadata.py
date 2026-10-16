@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class StripMetadata(Option):
-    """Remove image metadata."""
+    """
+    Remove image metadata.
+
+    Overrides the server metadata stripping setting for this request.
+
+    Attributes:
+        value: Whether to remove EXIF, IPTC, and other image metadata.
+
+    Usage:
+
+    .. code:: python
+
+        StripMetadata(value=True)
+
+    See `imgproxy strip metadata
+    <https://docs.imgproxy.net/usage/processing#strip-metadata>`_.
+
+    """
 
     value: bool
 

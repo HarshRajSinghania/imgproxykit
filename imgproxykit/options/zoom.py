@@ -8,7 +8,28 @@ from imgproxykit.types import EMPTY, Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Zoom(Option):
-    """Multiply dimensions by one factor or separate X and Y factors."""
+    """
+    Multiply dimensions by one factor or separate X and Y factors.
+
+    Unlike DPR, zoom does not scale gravity offsets, watermark offsets,
+    or padding. Factors must be greater than zero.
+
+    Attributes:
+        factor_x: Horizontal multiplier, also used vertically when
+            ``factor_y`` is omitted.
+        factor_y: Optional vertical multiplier.
+
+    Usage:
+
+    .. code:: python
+
+        Zoom(factor_x=2)
+        Zoom(factor_x=2, factor_y=1.5)
+
+    See `imgproxy zoom
+    <https://docs.imgproxy.net/usage/processing#zoom>`_.
+
+    """
 
     factor_x: float
     factor_y: float | EMPTY = EMPTY

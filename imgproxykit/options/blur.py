@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Blur(Option):
-    """Apply Gaussian blur with the given sigma."""
+    """
+    Apply Gaussian blur with the given sigma.
+
+    The sigma controls the size of the Gaussian blur mask.
+
+    Attributes:
+        value: Gaussian blur sigma.
+
+    Usage:
+
+    .. code:: python
+
+        Blur(value=2.0)
+
+    See `imgproxy blur
+    <https://docs.imgproxy.net/usage/processing#blur>`_.
+
+    """
 
     value: float
 

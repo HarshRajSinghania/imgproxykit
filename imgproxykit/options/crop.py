@@ -8,7 +8,33 @@ from imgproxykit.types import EMPTY, Argument, OptionType, Position
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Crop(Option):
-    """Crop before resizing; dimensions below one are relative."""
+    """
+    Crop before resizing; dimensions below one are relative.
+
+    Defines the source area to process before resizing. Omitted gravity
+    uses the request gravity; omitted arguments remain
+    :data:`~imgproxykit.types.EMPTY`.
+
+    Attributes:
+        width: Crop width: pixels at or above one, relative below one.
+            Zero uses the full source width.
+        height: Crop height: pixels at or above one, relative below one.
+            Zero uses the full source height.
+        gravity: Crop anchor, such as ``ce`` or ``fp``.
+        offset_x: Horizontal gravity offset or focus X coordinate.
+        offset_y: Vertical gravity offset or focus Y coordinate.
+
+    Usage:
+
+    .. code:: python
+
+        Crop(width=300, height=200, gravity='ce')
+        Crop(width=0.5, height=0.5, gravity='fp', offset_x=0.5, offset_y=0.5)
+
+    See `imgproxy crop
+    <https://docs.imgproxy.net/usage/processing#crop>`_.
+
+    """
 
     width: float | EMPTY = EMPTY
     height: float | EMPTY = EMPTY

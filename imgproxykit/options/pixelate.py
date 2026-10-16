@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Pixelate(Option):
-    """Set the pixelation block size."""
+    """
+    Set the pixelation block size.
+
+    Larger blocks produce a coarser pixelation effect.
+
+    Attributes:
+        value: Individual pixel block size in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        Pixelate(value=10)
+
+    See `imgproxy pixelate
+    <https://docs.imgproxy.net/usage/processing#pixelate>`_.
+
+    """
 
     value: int
 

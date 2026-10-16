@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType, ResizeType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class ResizingType(Option):
-    """Choose the resizing strategy."""
+    """
+    Choose the resizing strategy.
+
+    Controls how target dimensions and the source aspect ratio interact.
+
+    Attributes:
+        value: Resizing strategy: ``fit``, ``fill``, ``fill-down``,
+            ``force``, or ``auto``.
+
+    Usage:
+
+    .. code:: python
+
+        ResizingType(value='fill')
+
+    See `imgproxy resizing type
+    <https://docs.imgproxy.net/usage/processing#resizing-type>`_.
+
+    """
 
     value: ResizeType
 

@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class StripColorProfile(Option):
-    """Convert the embedded profile to sRGB and remove it."""
+    """
+    Convert the embedded profile to sRGB and remove it.
+
+    When enabled, imgproxy converts the embedded ICC profile to sRGB
+    and removes it. Otherwise, imgproxy tries to preserve the profile.
+
+    Attributes:
+        value: Whether to convert and remove the embedded color profile.
+
+    Usage:
+
+    .. code:: python
+
+        StripColorProfile(value=True)
+
+    See `imgproxy strip color profile
+    <https://docs.imgproxy.net/usage/processing#strip-color-profile>`_.
+
+    """
 
     value: bool
 

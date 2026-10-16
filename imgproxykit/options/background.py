@@ -8,7 +8,28 @@ from imgproxykit.types import EMPTY, Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Background(Option):
-    """Fill the background with a hex color or RGB tuple; omit to disable."""
+    """
+    Fill the background with a hex color or RGB tuple; omit to disable.
+
+    Useful when converting transparent images to JPEG. Omit the color
+    to disable background manipulation.
+
+    Attributes:
+        color: Hex color without a leading hash, or an RGB tuple with
+            channel values from 0 to 255. Omission disables filling.
+
+    Usage:
+
+    .. code:: python
+
+        Background(color='ffffff')
+        Background(color=(255, 255, 255))
+        Background()
+
+    See `imgproxy background
+    <https://docs.imgproxy.net/usage/processing#background>`_.
+
+    """
 
     color: str | tuple[int, int, int] | EMPTY = EMPTY
 

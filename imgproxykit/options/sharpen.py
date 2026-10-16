@@ -8,7 +8,24 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Sharpen(Option):
-    """Apply sharpening with the given sigma."""
+    """
+    Apply sharpening with the given sigma.
+
+    The sigma controls the size of the sharpening mask.
+
+    Attributes:
+        value: Sharpening filter sigma.
+
+    Usage:
+
+    .. code:: python
+
+        Sharpen(value=1.0)
+
+    See `imgproxy sharpen
+    <https://docs.imgproxy.net/usage/processing#sharpen>`_.
+
+    """
 
     value: float
 

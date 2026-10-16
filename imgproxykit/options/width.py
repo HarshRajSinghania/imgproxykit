@@ -8,7 +8,25 @@ from imgproxykit.types import Argument, OptionType
 @final
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Width(Option):
-    """Set the target width in pixels."""
+    """
+    Set the target width in pixels.
+
+    Zero lets imgproxy calculate width from height and aspect ratio.
+    With force resizing, zero preserves the source width.
+
+    Attributes:
+        value: Target width in pixels.
+
+    Usage:
+
+    .. code:: python
+
+        Width(value=300)
+
+    See `imgproxy width
+    <https://docs.imgproxy.net/usage/processing#width>`_.
+
+    """
 
     value: int
 
