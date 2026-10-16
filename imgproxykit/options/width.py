@@ -19,9 +19,9 @@ class Width(Option):
 
     Usage:
 
-    .. code:: python
-
-        Width(value=300)
+    >>> option = Width(value=300)
+    >>> option.arguments
+    (300,)
 
     See `imgproxy width
     <https://docs.imgproxy.net/usage/processing#width>`_.

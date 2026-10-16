@@ -19,9 +19,9 @@ class EnforceThumbnail(Option):
 
     Usage:
 
-    .. code:: python
-
-        EnforceThumbnail(value=True)
+    >>> option = EnforceThumbnail(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy enforce thumbnail
     <https://docs.imgproxy.net/usage/processing#enforce-thumbnail>`_.

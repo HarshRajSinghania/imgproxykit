@@ -19,9 +19,9 @@ class MaxAnimationFrameResolution(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxAnimationFrameResolution(value=20)
+    >>> option = MaxAnimationFrameResolution(value=20)
+    >>> option.arguments
+    (20,)
 
     See `imgproxy max animation frame resolution
     <https://docs.imgproxy.net/usage/processing#max-animation-frame-resolution>`_.

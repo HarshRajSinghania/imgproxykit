@@ -18,9 +18,9 @@ class Sharpen(Option):
 
     Usage:
 
-    .. code:: python
-
-        Sharpen(value=1.0)
+    >>> option = Sharpen(value=1.0)
+    >>> option.arguments
+    (1.0,)
 
     See `imgproxy sharpen
     <https://docs.imgproxy.net/usage/processing#sharpen>`_.

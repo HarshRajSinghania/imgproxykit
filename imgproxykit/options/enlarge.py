@@ -18,9 +18,9 @@ class Enlarge(Option):
 
     Usage:
 
-    .. code:: python
-
-        Enlarge(value=True)
+    >>> option = Enlarge(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy enlarge
     <https://docs.imgproxy.net/usage/processing#enlarge>`_.

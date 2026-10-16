@@ -19,9 +19,9 @@ class MaxBytes(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxBytes(value=100_000)
+    >>> option = MaxBytes(value=100_000)
+    >>> option.arguments
+    (100000,)
 
     See `imgproxy max bytes
     <https://docs.imgproxy.net/usage/processing#max-bytes>`_.

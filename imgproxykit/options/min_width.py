@@ -18,9 +18,9 @@ class MinWidth(Option):
 
     Usage:
 
-    .. code:: python
-
-        MinWidth(value=300)
+    >>> option = MinWidth(value=300)
+    >>> option.arguments
+    (300,)
 
     See `imgproxy min width
     <https://docs.imgproxy.net/usage/processing#min-width>`_.

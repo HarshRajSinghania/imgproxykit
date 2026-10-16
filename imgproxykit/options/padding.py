@@ -24,10 +24,12 @@ class Padding(Option):
 
     Usage:
 
-    .. code:: python
-
-        Padding(top=10)
-        Padding(top=10, right=20, bottom=30, left=40)
+    >>> option = Padding(top=10)
+    >>> option.arguments
+    (10, EMPTY, EMPTY, EMPTY)
+    >>> option = Padding(top=10, right=20, bottom=30, left=40)
+    >>> option.arguments
+    (10, 20, 30, 40)
 
     See `imgproxy padding
     <https://docs.imgproxy.net/usage/processing#padding>`_.

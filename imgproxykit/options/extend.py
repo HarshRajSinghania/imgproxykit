@@ -22,9 +22,9 @@ class Extend(Option):
 
     Usage:
 
-    .. code:: python
-
-        Extend(value=True, gravity='so')
+    >>> option = Extend(value=True, gravity='so')
+    >>> option.arguments
+    (True, 'so', EMPTY, EMPTY)
 
     See `imgproxy extend
     <https://docs.imgproxy.net/usage/processing#extend>`_.

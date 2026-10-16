@@ -19,9 +19,9 @@ class MaxAnimationFrames(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxAnimationFrames(value=100)
+    >>> option = MaxAnimationFrames(value=100)
+    >>> option.arguments
+    (100,)
 
     See `imgproxy max animation frames
     <https://docs.imgproxy.net/usage/processing#max-animation-frames>`_.

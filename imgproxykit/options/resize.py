@@ -23,9 +23,9 @@ class Resize(Option):
 
     Usage:
 
-    .. code:: python
-
-        Resize(width=96, height=96, mode='fill')
+    >>> option = Resize(width=96, height=96, mode='fill')
+    >>> option.arguments
+    ('fill', 96, 96, EMPTY, EMPTY)
 
     See `imgproxy resize
     <https://docs.imgproxy.net/usage/processing#resize>`_.

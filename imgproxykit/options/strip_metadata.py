@@ -18,9 +18,9 @@ class StripMetadata(Option):
 
     Usage:
 
-    .. code:: python
-
-        StripMetadata(value=True)
+    >>> option = StripMetadata(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy strip metadata
     <https://docs.imgproxy.net/usage/processing#strip-metadata>`_.

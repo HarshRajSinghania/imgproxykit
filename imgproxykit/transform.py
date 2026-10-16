@@ -27,28 +27,24 @@ class Transform:
 
     Usage:
 
-    .. code:: python
-
-        from imgproxykit import Client, Transform
-        from imgproxykit.options import Quality, Resize
-
-        thumbnail = Transform(
-            options=(
-                Resize(width=300, height=300, mode='fill'),
-                Quality(85),
-            ),
-            format='webp',
-        )
-        client = Client('https://images.example.com')
-
-        first_url = client.url(
-            'https://example.com/first.jpg',
-            transform=thumbnail,
-        )
-        second_url = client.url(
-            'https://example.com/second.jpg',
-            transform=thumbnail,
-        )
+    >>> from imgproxykit import Client, Transform
+    >>> from imgproxykit.options import Quality, Resize
+    >>> thumbnail = Transform(
+    ...     options=(
+    ...         Resize(width=300, height=300, mode='fill'),
+    ...         Quality(85),
+    ...     ),
+    ...     format='webp',
+    ... )
+    >>> client = Client('https://images.example.com')
+    >>> first_url = client.url(
+    ...     'https://example.com/first.jpg',
+    ...     transform=thumbnail,
+    ... )
+    >>> second_url = client.url(
+    ...     'https://example.com/second.jpg',
+    ...     transform=thumbnail,
+    ... )
 
     """
 

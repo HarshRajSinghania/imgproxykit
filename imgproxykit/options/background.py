@@ -20,11 +20,15 @@ class Background(Option):
 
     Usage:
 
-    .. code:: python
-
-        Background(color='ffffff')
-        Background(color=(255, 255, 255))
-        Background()
+    >>> option = Background(color='ffffff')
+    >>> option.arguments
+    ('ffffff',)
+    >>> option = Background(color=(255, 255, 255))
+    >>> option.arguments
+    (255, 255, 255)
+    >>> option = Background()
+    >>> option.arguments
+    (EMPTY,)
 
     See `imgproxy background
     <https://docs.imgproxy.net/usage/processing#background>`_.

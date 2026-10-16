@@ -68,16 +68,13 @@ class Client:
 
         Usage:
 
-        .. code:: python
-
-            from imgproxykit import Client
-
-            unsigned = Client('https://images.example.com')
-            signed = Client(
-                'https://images.example.com',
-                key='736563726574',
-                salt='73616c74',
-            )
+        >>> from imgproxykit import Client
+        >>> unsigned = Client('https://images.example.com')
+        >>> signed = Client(
+        ...     'https://images.example.com',
+        ...     key='736563726574',
+        ...     salt='73616c74',
+        ... )
 
         The signing credentials above are examples for local development.
 
@@ -91,7 +88,7 @@ class Client:
         self,
         source: str,
         *,
-        transform: Transform = ...,
+        transform: Transform | EMPTY = ...,
     ) -> str: ...
 
     @overload
@@ -143,24 +140,20 @@ class Client:
 
         Usage:
 
-        .. code:: python
-
-            from imgproxykit import Client, Transform
-            from imgproxykit.options import Resize
-
-            client = Client('https://images.example.com')
-            thumbnail = Transform(
-                options=(Resize(width=300, height=300, mode='fill'),),
-                format='webp',
-            )
-            source = 'https://example.com/photo.jpg'
-
-            local_options_url = client.url(source, transform=thumbnail)
-            server_presets_url = client.url(
-                source,
-                presets=('thumbnail', 'watermarked'),
-                format='webp',
-            )
+        >>> from imgproxykit import Client, Transform
+        >>> from imgproxykit.options import Resize
+        >>> client = Client('https://images.example.com')
+        >>> thumbnail = Transform(
+        ...     options=(Resize(width=300, height=300, mode='fill'),),
+        ...     format='webp',
+        ... )
+        >>> source = 'https://example.com/photo.jpg'
+        >>> local_options_url = client.url(source, transform=thumbnail)
+        >>> server_presets_url = client.url(
+        ...     source,
+        ...     presets=('thumbnail', 'watermarked'),
+        ...     format='webp',
+        ... )
 
         """
         path = self._path_builder(

@@ -5,8 +5,9 @@ Contents
 
 .. toctree::
   :maxdepth: 1
-  :caption: Changelog
+  :caption: Documentation
 
+  pages/usage.rst
   pages/changelog.rst
 
 

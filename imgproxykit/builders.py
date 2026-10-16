@@ -58,25 +58,21 @@ class PathBuilder:
 
         Usage:
 
-        .. code:: python
-
-            from imgproxykit import Transform
-            from imgproxykit.builders import PathBuilder
-            from imgproxykit.options import Resize
-
-            builder = PathBuilder()
-            source = 'https://example.com/photo.jpg'
-            thumbnail = Transform(
-                options=(Resize(width=96, height=96, mode='fill'),),
-                format='webp',
-            )
-
-            local_path = builder(source, transform=thumbnail)
-            preset_path = builder(
-                source,
-                presets=('thumbnail',),
-                output_format='webp',
-            )
+        >>> from imgproxykit import Transform
+        >>> from imgproxykit.builders import PathBuilder
+        >>> from imgproxykit.options import Resize
+        >>> builder = PathBuilder()
+        >>> source = 'https://example.com/photo.jpg'
+        >>> thumbnail = Transform(
+        ...     options=(Resize(width=96, height=96, mode='fill'),),
+        ...     format='webp',
+        ... )
+        >>> local_path = builder(source, transform=thumbnail)
+        >>> preset_path = builder(
+        ...     source,
+        ...     presets=('thumbnail',),
+        ...     output_format='webp',
+        ... )
 
         """
         options, selected_format = self._resolve_options(

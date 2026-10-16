@@ -18,9 +18,9 @@ class PreserveHDR(Option):
 
     Usage:
 
-    .. code:: python
-
-        PreserveHDR(value=True)
+    >>> option = PreserveHDR(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy preserve hdr
     <https://docs.imgproxy.net/usage/processing#preserve-hdr>`_.

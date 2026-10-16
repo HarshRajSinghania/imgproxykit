@@ -19,9 +19,9 @@ class Raw(Option):
 
     Usage:
 
-    .. code:: python
-
-        Raw(value=True)
+    >>> option = Raw(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy raw
     <https://docs.imgproxy.net/usage/processing#raw>`_.

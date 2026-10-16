@@ -18,9 +18,9 @@ class Expires(Option):
 
     Usage:
 
-    .. code:: python
-
-        Expires(value=1_900_000_000)
+    >>> option = Expires(value=1_900_000_000)
+    >>> option.arguments
+    (1900000000,)
 
     See `imgproxy expires
     <https://docs.imgproxy.net/usage/processing#expires>`_.

@@ -18,9 +18,9 @@ class Rotate(Option):
 
     Usage:
 
-    .. code:: python
-
-        Rotate(value=90)
+    >>> option = Rotate(value=90)
+    >>> option.arguments
+    (90,)
 
     See `imgproxy rotate
     <https://docs.imgproxy.net/usage/processing#rotate>`_.

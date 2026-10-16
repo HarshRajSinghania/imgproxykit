@@ -1,0 +1,8 @@
+max_concurrency = 4
+max_retries = 3
+require_https = true
+scheme = ["https"]
+exclude = [
+  # Example domains in the public API documentation are not real services.
+  '^https://(?:[^/]+\.)?example\.com(?:/|$)',
+]

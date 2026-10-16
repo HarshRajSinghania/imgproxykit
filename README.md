@@ -36,24 +36,26 @@ pip install imgproxykit
 
 Create a client, define a transform, and generate a URL:
 
-```python
-from imgproxykit import Client, Transform
-from imgproxykit.options import Quality, Resize
+```pycon
+>>> from imgproxykit import Client, Transform
+>>> from imgproxykit.options import Quality, Resize
+>>> client = Client('https://images.example.com')
+>>> thumbnail = Transform(
+...     options=(
+...         Resize(width=300, height=300, mode='fill'),
+...         Quality(85),
+...     ),
+...     format='webp',
+... )
+>>> url = client.url(
+...     'https://example.com/photo.jpg',
+...     transform=thumbnail,
+... )
+>>> url.startswith('https://images.example.com/unsafe/rs:fill:300:300/q:85/')
+True
+>>> url.endswith('.webp')
+True
 
-client = Client('https://images.example.com')
-
-thumbnail = Transform(
-    options=(
-        Resize(width=300, height=300, mode='fill'),
-        Quality(85),
-    ),
-    format='webp',
-)
-
-url = client.url(
-    'https://example.com/photo.jpg',
-    transform=thumbnail,
-)
 ```
 
 Reuse `client` and `thumbnail` for other source images. Options you omit are

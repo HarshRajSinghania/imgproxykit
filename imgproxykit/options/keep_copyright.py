@@ -18,9 +18,9 @@ class KeepCopyright(Option):
 
     Usage:
 
-    .. code:: python
-
-        KeepCopyright(value=True)
+    >>> option = KeepCopyright(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy keep copyright
     <https://docs.imgproxy.net/usage/processing#keep-copyright>`_.

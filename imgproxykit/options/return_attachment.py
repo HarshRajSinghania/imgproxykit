@@ -19,9 +19,9 @@ class ReturnAttachment(Option):
 
     Usage:
 
-    .. code:: python
-
-        ReturnAttachment(value=True)
+    >>> option = ReturnAttachment(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy return attachment
     <https://docs.imgproxy.net/usage/processing#return-attachment>`_.

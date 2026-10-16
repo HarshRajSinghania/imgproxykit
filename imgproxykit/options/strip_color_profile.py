@@ -19,9 +19,9 @@ class StripColorProfile(Option):
 
     Usage:
 
-    .. code:: python
-
-        StripColorProfile(value=True)
+    >>> option = StripColorProfile(value=True)
+    >>> option.arguments
+    (True,)
 
     See `imgproxy strip color profile
     <https://docs.imgproxy.net/usage/processing#strip-color-profile>`_.

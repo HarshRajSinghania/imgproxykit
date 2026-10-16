@@ -24,9 +24,9 @@ class Trim(Option):
 
     Usage:
 
-    .. code:: python
-
-        Trim(threshold=10, color='ffffff', equal_hor=True)
+    >>> option = Trim(threshold=10, color='ffffff', equal_hor=True)
+    >>> option.arguments
+    (10, 'ffffff', True, EMPTY)
 
     See `imgproxy trim
     <https://docs.imgproxy.net/usage/processing#trim>`_.

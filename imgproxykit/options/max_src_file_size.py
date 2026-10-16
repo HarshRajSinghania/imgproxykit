@@ -19,9 +19,9 @@ class MaxSrcFileSize(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxSrcFileSize(value=10_000_000)
+    >>> option = MaxSrcFileSize(value=10_000_000)
+    >>> option.arguments
+    (10000000,)
 
     See `imgproxy max src file size
     <https://docs.imgproxy.net/usage/processing#max-src-file-size>`_.

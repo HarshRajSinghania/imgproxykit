@@ -21,10 +21,12 @@ class Gravity(Option):
 
     Usage:
 
-    .. code:: python
-
-        Gravity(position='ce')
-        Gravity(position='fp', offset_x=0.25, offset_y=0.5)
+    >>> option = Gravity(position='ce')
+    >>> option.arguments
+    ('ce', EMPTY, EMPTY)
+    >>> option = Gravity(position='fp', offset_x=0.25, offset_y=0.5)
+    >>> option.arguments
+    ('fp', 0.25, 0.5)
 
     See `imgproxy gravity
     <https://docs.imgproxy.net/usage/processing#gravity>`_.

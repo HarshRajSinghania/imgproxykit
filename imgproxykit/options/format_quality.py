@@ -18,9 +18,9 @@ class FormatQuality(Option):
 
     Usage:
 
-    .. code:: python
-
-        FormatQuality(qualities=(('jpg', 85), ('webp', 80)))
+    >>> option = FormatQuality(qualities=(('jpg', 85), ('webp', 80)))
+    >>> option.arguments
+    ('jpg', 85, 'webp', 80)
 
     See `imgproxy format quality
     <https://docs.imgproxy.net/usage/processing#format-quality>`_.

@@ -19,9 +19,9 @@ class ResizingType(Option):
 
     Usage:
 
-    .. code:: python
-
-        ResizingType(value='fill')
+    >>> option = ResizingType(value='fill')
+    >>> option.arguments
+    ('fill',)
 
     See `imgproxy resizing type
     <https://docs.imgproxy.net/usage/processing#resizing-type>`_.

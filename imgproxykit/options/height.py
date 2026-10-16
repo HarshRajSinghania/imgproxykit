@@ -19,9 +19,9 @@ class Height(Option):
 
     Usage:
 
-    .. code:: python
-
-        Height(value=200)
+    >>> option = Height(value=200)
+    >>> option.arguments
+    (200,)
 
     See `imgproxy height
     <https://docs.imgproxy.net/usage/processing#height>`_.

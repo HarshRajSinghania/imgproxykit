@@ -19,9 +19,9 @@ class MaxSrcResolution(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxSrcResolution(value=50)
+    >>> option = MaxSrcResolution(value=50)
+    >>> option.arguments
+    (50,)
 
     See `imgproxy max src resolution
     <https://docs.imgproxy.net/usage/processing#max-src-resolution>`_.

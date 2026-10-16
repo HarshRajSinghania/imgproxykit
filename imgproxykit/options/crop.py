@@ -26,10 +26,14 @@ class Crop(Option):
 
     Usage:
 
-    .. code:: python
-
-        Crop(width=300, height=200, gravity='ce')
-        Crop(width=0.5, height=0.5, gravity='fp', offset_x=0.5, offset_y=0.5)
+    >>> option = Crop(width=300, height=200, gravity='ce')
+    >>> option.arguments
+    (300, 200, 'ce', EMPTY, EMPTY)
+    >>> option = Crop(
+    ...     width=0.5, height=0.5, gravity='fp', offset_x=0.5, offset_y=0.5
+    ... )
+    >>> option.arguments
+    (0.5, 0.5, 'fp', 0.5, 0.5)
 
     See `imgproxy crop
     <https://docs.imgproxy.net/usage/processing#crop>`_.

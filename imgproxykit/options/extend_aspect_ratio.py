@@ -22,9 +22,9 @@ class ExtendAspectRatio(Option):
 
     Usage:
 
-    .. code:: python
-
-        ExtendAspectRatio(value=True, gravity='so')
+    >>> option = ExtendAspectRatio(value=True, gravity='so')
+    >>> option.arguments
+    (True, 'so', EMPTY, EMPTY)
 
     See `imgproxy extend aspect ratio
     <https://docs.imgproxy.net/usage/processing#extend-aspect-ratio>`_.

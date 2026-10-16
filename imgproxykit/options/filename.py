@@ -21,9 +21,9 @@ class Filename(Option):
 
     Usage:
 
-    .. code:: python
-
-        Filename(value='product photo.jpg')
+    >>> option = Filename(value='product photo.jpg')
+    >>> option.arguments
+    ('cHJvZHVjdCBwaG90by5qcGc', True)
 
     See `imgproxy filename
     <https://docs.imgproxy.net/usage/processing#filename>`_.

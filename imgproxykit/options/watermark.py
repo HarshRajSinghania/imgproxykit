@@ -24,9 +24,11 @@ class Watermark(Option):
 
     Usage:
 
-    .. code:: python
-
-        Watermark(opacity=0.5, position='soea', offset_x=10, offset_y=10)
+    >>> option = Watermark(
+    ...     opacity=0.5, position='soea', offset_x=10, offset_y=10
+    ... )
+    >>> option.arguments
+    (0.5, 'soea', 10, 10, EMPTY)
 
     See `imgproxy watermark
     <https://docs.imgproxy.net/usage/processing#watermark>`_

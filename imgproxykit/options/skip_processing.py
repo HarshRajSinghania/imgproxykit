@@ -19,9 +19,9 @@ class SkipProcessing(Option):
 
     Usage:
 
-    .. code:: python
-
-        SkipProcessing(formats=('svg', 'gif'))
+    >>> option = SkipProcessing(formats=('svg', 'gif'))
+    >>> option.arguments
+    ('svg', 'gif')
 
     See `imgproxy skip processing
     <https://docs.imgproxy.net/usage/processing#skip-processing>`_.

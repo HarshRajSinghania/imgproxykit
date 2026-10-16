@@ -47,15 +47,12 @@ class URLSigner:
 
         Usage:
 
-        .. code:: python
-
-            from imgproxykit.signing import URLSigner
-
-            unsigned = URLSigner()
-            signed = URLSigner(
-                key='736563726574',
-                salt='73616c74',
-            )
+        >>> from imgproxykit.signing import URLSigner
+        >>> unsigned = URLSigner()
+        >>> signed = URLSigner(
+        ...     key='736563726574',
+        ...     salt='73616c74',
+        ... )
 
         These credentials are examples for local development.
 

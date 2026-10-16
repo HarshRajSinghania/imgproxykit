@@ -22,9 +22,9 @@ class Size(Option):
 
     Usage:
 
-    .. code:: python
-
-        Size(width=300, height=200, enlarge=True)
+    >>> option = Size(width=300, height=200, enlarge=True)
+    >>> option.arguments
+    (300, 200, True, EMPTY)
 
     See `imgproxy size
     <https://docs.imgproxy.net/usage/processing#size>`_.

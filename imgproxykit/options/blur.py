@@ -18,9 +18,9 @@ class Blur(Option):
 
     Usage:
 
-    .. code:: python
-
-        Blur(value=2.0)
+    >>> option = Blur(value=2.0)
+    >>> option.arguments
+    (2.0,)
 
     See `imgproxy blur
     <https://docs.imgproxy.net/usage/processing#blur>`_.

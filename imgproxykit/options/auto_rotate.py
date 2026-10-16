@@ -19,9 +19,9 @@ class AutoRotate(Option):
 
     Usage:
 
-    .. code:: python
-
-        AutoRotate(value=False)
+    >>> option = AutoRotate(value=False)
+    >>> option.arguments
+    (False,)
 
     See `imgproxy auto rotate
     <https://docs.imgproxy.net/usage/processing#auto-rotate>`_.

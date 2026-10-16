@@ -19,9 +19,9 @@ class MaxResultDimension(Option):
 
     Usage:
 
-    .. code:: python
-
-        MaxResultDimension(value=4096)
+    >>> option = MaxResultDimension(value=4096)
+    >>> option.arguments
+    (4096,)
 
     See `imgproxy max result dimension
     <https://docs.imgproxy.net/usage/processing#max-result-dimension>`_.

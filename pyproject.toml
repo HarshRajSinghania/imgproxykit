@@ -7,23 +7,24 @@ requires = [ "poetry-core>=2" ]
 name = "imgproxykit"
 version = "0.1.0"
 description = "A typed Python toolkit for building imgproxy URLs"
-license = "MIT"
-authors = [
-  { name = "Alexander Kondratev", email = "mail@kondratev.dev" },
-]
 readme = "README.md"
+keywords = [
+  "image-processing",
+  "image-transformation",
+  "images",
+  "imgproxy",
+  "url-builder",
+]
+license = "MIT"
 requires-python = ">=3.14,<4"
 dynamic = [ "classifiers" ]
-keywords = [
-  "imgproxy",
-  "images",
-  "image-processing",
-  "url-builder",
-  "image-transformation",
-]
 dependencies = [
   "typing-extensions>=4.16,<5",
 ]
+
+[[project.authors]]
+name = "Alexander Kondratev"
+email = "mail@kondratev.dev"
 
 [project.urls]
 GitHub = "https://github.com/kondratevdev/imgproxykit"
@@ -46,15 +47,16 @@ classifiers = [
 [tool.poetry.group.dev.dependencies]
 covdefaults = "^2.3"
 import-linter = ">=2.5,<3"
+inline-snapshot = ">=0.35,<1"
 mypy = "^2.4"
+pyrefly = ">=1,<2"
 pyright = ">=1.1,<2"
 pytest = "^9.1"
 pytest-cov = "^6.3"
 pytest-randomly = "^4.1"
 ruff = "^0.17"
 slotscheck = ">=0.19,<0.22"
-wemake-python-styleguide = "^1.7"
-inline-snapshot = ">=0.35,<1"
+wemake-python-styleguide = "^1.8"
 
 [tool.poetry.group.docs]
 optional = true
@@ -77,6 +79,9 @@ output-prefer-rule-codes = true
 [tool.ruff.format]
 quote-style = "single"
 docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [ "S101" ]
 
 [tool.ruff.lint]
 select = [
@@ -115,6 +120,7 @@ select = [
   "SLF",   # flake8-self
   "SLOT",  # flake8-slots
   "T100",  # flake8-debugger
+  "TID",   # flake8-tidy-imports
   "TRY",   # tryceratops
   "UP",    # pyupgrade
   "W",     # pycodestyle
@@ -148,9 +154,6 @@ external = [ "WPS" ]
 flake8-quotes.inline-quotes = "single"
 mccabe.max-complexity = 6
 pydocstyle.convention = "google"
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*.py" = [ "S101" ]
 
 
 [tool.codespell]
@@ -198,22 +201,45 @@ enable_error_code = [
   "unimported-reveal",
   "unused-awaitable",
 ]
-strict_equality_for_none = true
 # The mypy configurations: http://bit.ly/2zEl9WI
 extra_checks = true
+strict_equality_for_none = true
 strict = true
 
 
+[tool.pyrefly]
+project-includes = [ "imgproxykit", "tests" ]
+min-severity = "warn"
+preset = "strict"
+
+[tool.pyrefly.errors]
+implicit-any-attribute = false
+implicit-any-empty-container = false
+implicit-any-lambda = false
+unused-ignore = true
+
+
+[tool.pyright]
+pythonVersion = "3.14"
+venv = ".venv"
+venvPath = "."
+typeCheckingMode = "strict"
+include = [ "imgproxykit", "tests" ]
+# Older basedpyright versions gate PEP 661 sentinels behind this flag.
+enableExperimentalFeatures = true
+enableTypeIgnoreComments = false
+reportUnnecessaryTypeIgnoreComment = "error"
+
+
 [tool.pytest.ini_options]
-# pytest config: http://doc.pytest.org/en/latest/customize.html
-# Strict `@xfail` by default:
-xfail_strict = true
-# Fail on warnings:
-filterwarnings = [ "error" ]
 addopts = [
   "--strict-config",
   "--strict-markers",
   "--doctest-modules",
+  "--doctest-glob=*.rst",
+  "--doctest-glob=README.md",
+  "--ignore=docs/conf.py",
+  "--ignore=docs/_build/",
   # Output:
   "--tb=short",
   # Coverage:
@@ -225,23 +251,16 @@ addopts = [
   "--cov-branch",
   "--cov-fail-under=100",
 ]
+# pytest config: http://doc.pytest.org/en/latest/customize.html
+# Strict `@xfail` by default:
+xfail_strict = true
+# Fail on warnings:
+filterwarnings = [ "error" ]
 
 
 [tool.coverage.run]
 # Covdefaults: https://pypi.org/project/covdefaults
 plugins = [ "covdefaults" ]
-
-
-[tool.pyright]
-venv = ".venv"
-venvPath = "."
-pythonVersion = "3.14"
-typeCheckingMode = "strict"
-# Older basedpyright versions gate PEP 661 sentinels behind this flag.
-enableExperimentalFeatures = true
-reportUnnecessaryTypeIgnoreComment = "error"
-enableTypeIgnoreComments = false
-include = [ "imgproxykit", "tests" ]
 
 
 [tool.slotscheck]

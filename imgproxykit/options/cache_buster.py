@@ -20,9 +20,9 @@ class CacheBuster(Option):
 
     Usage:
 
-    .. code:: python
-
-        CacheBuster(value='v2')
+    >>> option = CacheBuster(value='v2')
+    >>> option.arguments
+    ('v2',)
 
     See `imgproxy cache buster
     <https://docs.imgproxy.net/usage/processing#cache-buster>`_.

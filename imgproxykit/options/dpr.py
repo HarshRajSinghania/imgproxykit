@@ -18,9 +18,9 @@ class DPR(Option):
 
     Usage:
 
-    .. code:: python
-
-        DPR(2)
+    >>> option = DPR(2)
+    >>> option.arguments
+    (2,)
 
     See `imgproxy DPR
     <https://docs.imgproxy.net/usage/processing#dpr>`_.

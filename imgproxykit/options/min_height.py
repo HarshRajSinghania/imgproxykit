@@ -18,9 +18,9 @@ class MinHeight(Option):
 
     Usage:
 
-    .. code:: python
-
-        MinHeight(value=200)
+    >>> option = MinHeight(value=200)
+    >>> option.arguments
+    (200,)
 
     See `imgproxy min height
     <https://docs.imgproxy.net/usage/processing#min-height>`_.

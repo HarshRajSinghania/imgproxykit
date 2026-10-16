@@ -20,10 +20,12 @@ class Flip(Option):
 
     Usage:
 
-    .. code:: python
-
-        Flip(horizontal=True)
-        Flip(horizontal=True, vertical=True)
+    >>> option = Flip(horizontal=True)
+    >>> option.arguments
+    (True, EMPTY)
+    >>> option = Flip(horizontal=True, vertical=True)
+    >>> option.arguments
+    (True, True)
 
     See `imgproxy flip
     <https://docs.imgproxy.net/usage/processing#flip>`_.

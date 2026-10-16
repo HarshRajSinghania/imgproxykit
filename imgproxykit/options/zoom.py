@@ -21,10 +21,12 @@ class Zoom(Option):
 
     Usage:
 
-    .. code:: python
-
-        Zoom(factor_x=2)
-        Zoom(factor_x=2, factor_y=1.5)
+    >>> option = Zoom(factor_x=2)
+    >>> option.arguments
+    (2, EMPTY)
+    >>> option = Zoom(factor_x=2, factor_y=1.5)
+    >>> option.arguments
+    (2, 1.5)
 
     See `imgproxy zoom
     <https://docs.imgproxy.net/usage/processing#zoom>`_.

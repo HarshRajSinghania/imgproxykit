@@ -18,9 +18,9 @@ class Pixelate(Option):
 
     Usage:
 
-    .. code:: python
-
-        Pixelate(value=10)
+    >>> option = Pixelate(value=10)
+    >>> option.arguments
+    (10,)
 
     See `imgproxy pixelate
     <https://docs.imgproxy.net/usage/processing#pixelate>`_.

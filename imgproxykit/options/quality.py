@@ -16,9 +16,9 @@ class Quality(Option):
 
     Usage:
 
-    .. code:: python
-
-        Quality(85)
+    >>> option = Quality(85)
+    >>> option.arguments
+    (85,)
 
     See `imgproxy quality
     <https://docs.imgproxy.net/usage/processing#quality>`_.

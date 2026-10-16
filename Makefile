@@ -18,9 +18,10 @@ lint: ## Run linting checks (ruff, flake8, slotscheck, import-linter)
 	$(POETRY) run lint-imports
 
 .PHONY: type-check
-type-check: ## Run mypy and Pyright, including public API type tests
+type-check: ## Run mypy, Pyright and Pyrefly, including public API type tests
 	$(POETRY) run mypy .
 	$(POETRY) run pyright
+	$(POETRY) run pyrefly check --remove-unused-ignores
 
 .PHONY: unit
 unit: ## Run unit tests with pytest
