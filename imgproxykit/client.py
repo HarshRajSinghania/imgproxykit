@@ -23,24 +23,28 @@ class Client:
 
     """
 
-    __slots__ = ('_base_url', '_path_builder', '_signer')
+    __slots__ = (
+        '_base_url',
+        '_path_builder',
+        '_signer',
+    )
 
     #: Component that resolves processing parameters and builds unsigned paths.
     path_builder_cls: ClassVar[type[PathBuilder]] = PathBuilder
-
     #: Component that signs paths or returns the unsigned URL marker.
     signer_cls: ClassVar[type[URLSigner]] = URLSigner
 
     @overload
-    def __init__(self, *, base_url: str) -> None: ...
+    def __init__(self, base_url: str, /) -> None: ...
 
     @overload
-    def __init__(self, *, base_url: str, key: str, salt: str) -> None: ...
+    def __init__(self, base_url: str, /, *, key: str, salt: str) -> None: ...
 
     def __init__(
         self,
-        *,
         base_url: str,
+        /,
+        *,
         key: str | EMPTY = EMPTY,
         salt: str | EMPTY = EMPTY,
     ) -> None:
@@ -53,7 +57,8 @@ class Client:
 
         Args:
             base_url: Public imgproxy address, including any deployment path
-                prefix. Trailing slashes are removed.
+                prefix. Required positional argument. Trailing slashes
+                are removed.
             key: Hex-encoded signing key matching the server configuration.
             salt: Hex-encoded signing salt matching the server configuration.
 
@@ -67,9 +72,9 @@ class Client:
 
             from imgproxykit import Client
 
-            unsigned = Client(base_url='http://localhost:10002')
+            unsigned = Client('https://images.example.com')
             signed = Client(
-                base_url='https://images.example.com',
+                'https://images.example.com',
                 key='736563726574',
                 salt='73616c74',
             )
@@ -140,9 +145,10 @@ class Client:
 
         .. code:: python
 
-            from imgproxykit import Client, Resize, Transform
+            from imgproxykit import Client, Transform
+            from imgproxykit.options import Resize
 
-            client = Client(base_url='http://localhost:10002')
+            client = Client('https://images.example.com')
             thumbnail = Transform(
                 options=(Resize(width=300, height=300, mode='fill'),),
                 format='webp',
@@ -163,4 +169,5 @@ class Client:
             presets=presets,
             output_format=format,
         )
-        return f'{self._base_url}/{self._signer(path)}{path}'
+        signature = self._signer(path)
+        return f'{self._base_url}/{signature}{path}'

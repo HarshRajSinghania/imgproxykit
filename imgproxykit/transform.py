@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from imgproxykit.options import DPR, Gravity, Option, Resize
+from imgproxykit.options import Option
 from imgproxykit.types import EMPTY
 
 
@@ -8,5 +8,5 @@ from imgproxykit.types import EMPTY
 class Transform:
     """A reusable collection of processing options and output format."""
 
-    options: tuple[Option | Resize | Gravity | DPR, ...] = ()
+    options: tuple[Option, ...] = ()
     format: str | EMPTY = EMPTY

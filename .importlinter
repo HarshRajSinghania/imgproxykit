@@ -1,17 +1,52 @@
+# See https://github.com/seddonym/import-linter
+
 [importlinter]
 root_package = imgproxykit
 include_external_packages = True
 exclude_type_checking_imports = True
 
 [importlinter:contract:layers]
-name = URL construction layers
+name = Layered architecture of URL construction
 type = layers
-containers = imgproxykit
+
+containers =
+  imgproxykit
+
 layers =
+  # Coordinate path construction and signing:
   client
+  # Independent client components:
   builders | signing
-  internal.urls
+  # Serialize processing options and assemble paths:
+  internal.paths | internal.serialization
+  # Reusable processing configuration:
   transform
   options
   types
-  internal.empty
+  # Shared low-level utilities:
+  internal.constants | internal.encoding | internal.empty
+
+[importlinter:contract:options-independence]
+name = Concrete processing options must be independent
+type = independence
+
+modules =
+  imgproxykit.options.*
+
+ignore_imports =
+  # Every concrete option implements the shared base contract:
+  imgproxykit.options.* -> imgproxykit.options.base
+
+[importlinter:contract:signing-independence]
+name = Signing must not depend on processing or path construction
+type = forbidden
+
+source_modules =
+  imgproxykit.signing
+
+forbidden_modules =
+  imgproxykit.builders
+  imgproxykit.transform
+  imgproxykit.options
+  imgproxykit.internal.paths
+  imgproxykit.internal.serialization
