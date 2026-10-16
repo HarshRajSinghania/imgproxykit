@@ -19,7 +19,8 @@ Your imgproxy server fetches and processes the image when the URL is requested.
 
 - [x] Typed API with annotations
 - [x] Immutable, reusable transforms built from Python dataclasses
-- [x] Options for resizing, quality, pixel density, gravity, and watermarks
+- [x] Free imgproxy processing options, including geometry, filters, metadata,
+      quality, pixel density, gravity, and watermarks
 - [x] Output format selection, including WebP and AVIF
 - [x] Support for named presets configured on your imgproxy server
 

@@ -1,0 +1,21 @@
+from dataclasses import dataclass
+from typing import ClassVar, final, override
+
+from imgproxykit.options.base import Option
+from imgproxykit.types import Argument, FormatType, OptionType
+
+
+@final
+@dataclass(frozen=True, slots=True, kw_only=True)
+class SkipProcessing(Option):
+    """Skip processing listed formats when source and output formats match."""
+
+    formats: tuple[FormatType, ...]
+
+    _name: ClassVar[OptionType] = 'skp'
+
+    @property
+    @override
+    def arguments(self) -> tuple[Argument, ...]:
+        """Positional arguments in imgproxy protocol order."""
+        return self.formats
