@@ -26,7 +26,7 @@ Your imgproxy server fetches and processes the image when the URL is requested.
 
 ## Installation
 
-Requires **Python 3.14+** and a running imgproxy server.
+Requires **Python 3.12+** and a running imgproxy server.
 
 ```bash
 pip install imgproxykit

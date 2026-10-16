@@ -643,7 +643,7 @@ description = "Get image size from headers (BMP/PNG/JPEG/JPEG2000/GIF/TIFF/SVG/N
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["docs"]
-markers = "python_version == \"3.14\""
+markers = "python_version < \"3.15\""
 files = [
     {file = "imagesize-2.0.0-py2.py3-none-any.whl", hash = "sha256:5667c5bbb57ab3f1fa4bc366f4fbc971db3d5ed011fd2715fd8001f782718d96"},
     {file = "imagesize-2.0.0.tar.gz", hash = "sha256:8e8358c4a05c304f1fccf7ff96f036e7243a189e9e42e90851993c558cfe9ee3"},
@@ -1771,5 +1771,5 @@ mcp = ["mcp[cli] (>=2.0,<3.0)"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.14,<4"
-content-hash = "470e3f00c8d5344256f587daf81c3176318ead8d0b709c5b4bf423faa014d30e"
+python-versions = ">=3.12,<4"
+content-hash = "4c7e25a5bbd9ae10a5bc127235d98ae7495c93b264e79145ccc0049e2034339f"

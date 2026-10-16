@@ -16,7 +16,7 @@ keywords = [
   "url-builder",
 ]
 license = "MIT"
-requires-python = ">=3.14,<4"
+requires-python = ">=3.12,<4"
 dynamic = [ "classifiers" ]
 dependencies = [
   "typing-extensions>=4.16,<5",
@@ -69,7 +69,7 @@ sphinx-autodoc-typehints = "^3.0"
 
 
 [tool.ruff]
-target-version = "py314"
+target-version = "py312"
 line-length = 80
 # Ruff config: https://docs.astral.sh/ruff/settings
 preview = true
@@ -220,7 +220,7 @@ unused-ignore = true
 
 
 [tool.pyright]
-pythonVersion = "3.14"
+pythonVersion = "3.12"
 venv = ".venv"
 venvPath = "."
 typeCheckingMode = "strict"

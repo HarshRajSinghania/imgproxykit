@@ -43,7 +43,7 @@ make type-check
 
 `make lint` also checks slots and import architecture. `make package` checks
 that `poetry.lock` matches `pyproject.toml` and installed dependencies agree.
-The project requires Python 3.14 or newer (within Python 3).
+The project requires Python 3.12 or newer (within Python 3).
 
 These steps are mandatory during the CI.
 
