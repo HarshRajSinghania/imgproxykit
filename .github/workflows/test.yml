@@ -49,7 +49,7 @@ jobs:
         poetry run python -m ensurepip
 
     - name: Run checks
-      run: make test
+      run: make check
 
     # Upload coverage to codecov: https://codecov.io/
     - name: Upload coverage to Codecov

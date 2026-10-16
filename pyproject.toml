@@ -57,6 +57,9 @@ pytest-randomly = "^5.0"
 ruff = "^0.17"
 slotscheck = ">=0.19,<0.22"
 wemake-python-styleguide = "^1.8"
+testcontainers = ">=4.15,<5"
+pillow = ">=12,<13"
+zapros = ">=0.21,<0.22"
 
 [tool.poetry.group.docs]
 optional = true

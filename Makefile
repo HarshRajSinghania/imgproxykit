@@ -27,7 +27,11 @@ type-check: ## Run mypy, Pyright and Pyrefly, including public API type tests
 
 .PHONY: unit
 unit: ## Run unit tests with pytest
-	$(POETRY) run pytest
+	$(POETRY) run pytest --ignore=tests/test_integration
+
+.PHONY: integration
+integration: ## Run integration tests (requires Docker)
+	$(POETRY) run pytest tests/test_integration --cov-fail-under=0
 
 .PHONY: package
 package: ## Check package dependencies with pip
@@ -39,4 +43,8 @@ docs: ## Build HTML documentation (install dependencies with poetry install --wi
 	$(POETRY) run sphinx-build -W -b html docs docs/_build/html
 
 .PHONY: test
-test: lint type-check package unit ## Run all checks (lint, type-check, package, unit)
+test: ## Run all tests including integration tests (requires Docker)
+	$(POETRY) run pytest
+
+.PHONY: check
+check: lint type-check package test ## Run all checks and tests

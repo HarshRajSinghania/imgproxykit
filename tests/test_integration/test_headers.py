@@ -1,0 +1,39 @@
+from email.message import Message
+
+import pytest
+import zapros
+
+from imgproxykit import Client, Transform
+from imgproxykit.options import Filename, ReturnAttachment
+from tests.test_integration.assertions import assert_image
+
+
+@pytest.mark.parametrize(
+    ('attachment', 'disposition'),
+    [(True, 'attachment'), (False, 'inline')],
+)
+def test_content_disposition(
+    imgproxy_client: Client,
+    http_client: zapros.Client,
+    *,
+    attachment: bool,
+    disposition: str,
+) -> None:
+    """Ensure that filenames and attachment flags reach response headers."""
+    transform = Transform(
+        options=(
+            Filename(value='product photo'),
+            ReturnAttachment(value=attachment),
+        ),
+        format='png',
+    )
+
+    response = http_client.get(
+        imgproxy_client.url('local:///source.png', transform=transform),
+    )
+
+    assert_image(response, format='PNG', size=(640, 480))
+    headers = Message()
+    headers['Content-Disposition'] = response.headers['Content-Disposition']
+    assert headers.get_content_disposition() == disposition
+    assert headers.get_filename() == 'product photo.png'

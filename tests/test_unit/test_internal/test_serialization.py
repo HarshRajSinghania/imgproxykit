@@ -22,6 +22,7 @@ _HEIGHT: Final = 200
         (('fill', EMPTY, EMPTY), 'rs:fill'),
         ((EMPTY, _WIDTH, EMPTY), 'rs::300'),
         ((_WIDTH, EMPTY, _HEIGHT), 'rs:300::200'),
+        (('fill', EMPTY, EMPTY, True), 'rs:fill:::1'),
         ((True, False), 'rs:1:0'),
         ((0,), 'rs:0'),
         ((0.0, 1.5), 'rs:0.0:1.5'),  # noqa: WPS358

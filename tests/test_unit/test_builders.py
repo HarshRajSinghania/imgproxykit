@@ -44,19 +44,30 @@ def test_transform_path() -> None:
     )
 
 
-def test_empty_transform_path() -> None:
-    """Ensure that an empty transform adds neither options nor extension."""
-    assert PathBuilder()(_SOURCE, transform=Transform()) == snapshot(
-        '/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
+@pytest.mark.parametrize(
+    ('transform', 'expected'),
+    [
+        (Transform(), '/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc'),
+        (
+            Transform(format='webp'),
+            '/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc.webp',
+        ),
+        (
+            Transform(options=(Quality(_QUALITY),)),
+            '/q:85/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
+        ),
+    ],
+)
+def test_partial_transform_path(*, transform: Transform, expected: str) -> None:
+    """Ensure that transform options and format can be omitted independently."""
+    assert PathBuilder()(_SOURCE, transform=transform) == expected
+
+
+def test_empty_presets_path() -> None:
+    """Ensure that explicit empty presets retain the preset segment."""
+    assert PathBuilder()(_SOURCE, presets=()) == snapshot(
+        '/pr/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
     )
-
-
-def test_format_only_transform_path() -> None:
-    """Ensure that a transform can select a format without any options."""
-    assert PathBuilder()(
-        _SOURCE,
-        transform=Transform(format='webp'),
-    ) == snapshot('/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc.webp')
 
 
 def test_presets_path() -> None:

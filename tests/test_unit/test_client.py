@@ -1,0 +1,68 @@
+from typing import Final
+
+import pytest
+from inline_snapshot import snapshot
+
+from imgproxykit import Client, Transform
+from imgproxykit.options import Resize
+
+_SOURCE: Final = 'https://example.com/photo.jpg'
+_WIDTH: Final = 300
+_HEIGHT: Final = 200
+
+
+@pytest.mark.parametrize(
+    'base_url',
+    [
+        'https://images.example.com/images',
+        'https://images.example.com/images/',
+        'https://images.example.com/images///',
+    ],
+)
+def test_unsigned_url(*, base_url: str) -> None:
+    """Ensure that base URL prefixes survive trailing slash removal."""
+    client = Client(base_url)
+
+    assert client.url(_SOURCE) == snapshot(
+        'https://images.example.com/images/unsafe/'
+        'aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
+    )
+
+
+def test_signed_url() -> None:
+    """Ensure that the complete processing path is signed."""
+    client = Client(
+        'https://images.example.com',
+        key='736563726574',
+        salt='73616c74',
+    )
+    transform = Transform(
+        options=(
+            Resize(
+                width=_WIDTH,
+                height=_HEIGHT,
+                mode='fill',
+            ),
+        ),
+        format='webp',
+    )
+
+    assert client.url(_SOURCE, transform=transform) == snapshot(
+        'https://images.example.com/'
+        'IFOHEnjwIOnwbBU8WexRy_3nv99lVipxJG_F6tiWiKY/'
+        'rs:fill:300:200/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc.webp',
+    )
+
+
+def test_presets_url() -> None:
+    """Ensure that preset names and output format reach the path builder."""
+    client = Client('https://images.example.com')
+
+    assert client.url(
+        _SOURCE,
+        presets=('thumbnail', 'watermarked'),
+        format='avif',
+    ) == snapshot(
+        'https://images.example.com/unsafe/pr:thumbnail:watermarked/'
+        'aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc.avif',
+    )

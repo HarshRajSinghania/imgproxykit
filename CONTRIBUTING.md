@@ -14,11 +14,17 @@ To activate your `virtualenv` run `poetry shell` or `source .venv/bin/activate`.
 
 ## One magic command
 
-Run `make test` to run everything we have!
+Run `make check` to run everything we have!
 
 ## Tests
 
-To run tests:
+To run all tests, including integration tests (requires Docker):
+
+```bash
+make test
+```
+
+To run unit tests only:
 
 ```bash
 make unit
@@ -71,12 +77,12 @@ In this method, the latest version of the app is always in the `master` branch.
 
 Before submitting your code please do the following steps:
 
-1. Run `make test` to make sure everything was working before
+1. Run `make check` to make sure everything was working before
 2. Add any changes you want
 3. Add tests for the new changes
 4. Edit documentation if you have changed something significant
 5. Update `CHANGELOG.md` with a quick summary of your changes
-6. Run `make test` again to make sure it is still working
+6. Run `make check` again to make sure it is still working
 
 ## Other help
 
