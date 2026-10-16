@@ -10,7 +10,6 @@
 [![PyPI Version](https://img.shields.io/pypi/v/imgproxykit.svg)](https://pypi.org/project/imgproxykit/)
 [![Supported Python Version](https://img.shields.io/pypi/pyversions/imgproxykit.svg)](https://pypi.org/project/imgproxykit/)
 [![Typing](https://img.shields.io/badge/typing-typed-35544A.svg)](https://github.com/kondratevdev/imgproxykit/blob/master/imgproxykit/py.typed)
-[![Code Style](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 [![License](https://img.shields.io/badge/license-MIT-35544A.svg)](LICENSE)
 
 </div>

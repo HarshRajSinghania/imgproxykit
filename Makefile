@@ -34,5 +34,9 @@ package: ## Check package dependencies with pip
 	$(POETRY) check --lock
 	$(POETRY) run pip check
 
+.PHONY: docs
+docs: ## Build HTML documentation (install dependencies with poetry install --with docs)
+	$(POETRY) run sphinx-build -W -b html docs docs/_build/html
+
 .PHONY: test
 test: lint type-check package unit ## Run all checks (lint, type-check, package, unit)
