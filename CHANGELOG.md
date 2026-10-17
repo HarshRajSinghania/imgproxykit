@@ -18,6 +18,8 @@ but with a deprecation period.
 
 ### Misc
 
+- Added API Reference documentation for the public API, #5
+
 
 ## Version 0.1.0
 
