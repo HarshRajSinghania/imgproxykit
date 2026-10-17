@@ -18,3 +18,6 @@ credentials are for examples only::
     False
     >>> url == client.url('https://example.com/photo.jpg')
     True
+
+See :doc:`API Reference <api-reference/index>` for complete signatures,
+processing options, and extension points.

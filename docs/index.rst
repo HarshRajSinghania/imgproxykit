@@ -64,3 +64,9 @@ requests: imgproxy fetches and processes the image when the URL is requested.
 
     pages/usage
     pages/changelog
+
+.. toctree::
+    :caption: API Reference
+    :hidden:
+
+    pages/api-reference/index
