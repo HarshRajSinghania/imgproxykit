@@ -125,6 +125,9 @@ class PathBuilder:
         A separate output format is only accepted with server presets.
 
         """
+        # TODO: Support server presets together with Python options; imgproxy
+        # allows both in one URL. Consider a typed Preset option in Transform
+        # and define ordering before relaxing this validation.
         if transform is not EMPTY and presets is not EMPTY:
             raise ValueError('Choose transform or presets.')
 

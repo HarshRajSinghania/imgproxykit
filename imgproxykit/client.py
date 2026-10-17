@@ -84,6 +84,8 @@ class Client:
         self._path_builder = self.path_builder_cls()
         self._signer = self.signer_cls(key=key, salt=salt)
 
+    # TODO: Remove the separate format argument once Format is an option;
+    # express format-only URLs and presets with formats through Transform.
     @overload
     def url(
         self,

@@ -48,7 +48,15 @@ class Transform:
 
     """
 
-    # TODO: Add immutable composition; define duplicate option handling,
-    # format overrides, and explicitly clearing an inherited format.
+    # TODO: Add immutable derivation with explicit append/replace semantics.
+    # Define conflicts between overlapping options (Resize, Size, Width),
+    # repeated options, format overrides, and clearing an inherited format.
+    # TODO: Document with examples that option order controls serialization
+    # and overrides, while imgproxy determines the processing pipeline.
+    # TODO: Accept positional *options instead of options=(...), preserving
+    # immutable tuple storage; update examples and public API typing tests.
     options: tuple[Option, ...] = ()
+    # TODO: Move format into a typed Format option alongside other components
+    # and serialize it as an f segment. Remove this separate field and use
+    # the common option composition and replacement rules for formats.
     format: FormatType | EMPTY = EMPTY

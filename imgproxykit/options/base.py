@@ -27,7 +27,10 @@ class Option(ABC):
     # time (for example, rotation multiples of 90 and positive zoom factors).
     # Leave configuration-dependent restrictions to the imgproxy server.
     # TODO: Allow custom option names without type ignores; decide whether
-    # OptionType should remain limited to built-in processing options.
+    # Option.name should return str, keeping OptionType for built-in names.
+    # TODO: Unify constructors: Quality and DPR allow positional values,
+    # while other single-value options require keywords. Choose one rule
+    # for scalar options and keep multi-argument options keyword-only.
 
     # Private API:
     _name: ClassVar[OptionType]
