@@ -1,6 +1,6 @@
 from typing import ClassVar, overload
 
-from imgproxykit.builders import PathBuilder
+from imgproxykit.builder import PathBuilder
 from imgproxykit.signing import URLSigner
 from imgproxykit.transform import Transform
 from imgproxykit.types import EMPTY
@@ -142,7 +142,7 @@ class Client:
         >>> from imgproxykit.options import Resize
         >>> client = Client('https://images.example.com')
         >>> thumbnail = Transform(
-        ...     options=(Resize(width=300, height=300, mode='fill'),),
+        ...     Resize(width=300, height=300, mode='fill'),
         ...     format='webp',
         ... )
         >>> source = 'https://example.com/photo.jpg'
