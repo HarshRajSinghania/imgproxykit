@@ -16,7 +16,7 @@
 
 ## Features
 
-- [x] TODO
+- [x] Fully typed and checked with `mypy`, `pyright`, and `pyrefly` in strict modes
 
 ---------
 
@@ -36,11 +36,11 @@ Build a URL for a WebP thumbnail served by your imgproxy server:
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
 
-client = Client('https://imgproxy.you-app.com')  # Your imgproxy server.
+client = Client('https://imgproxy.your-app.com')  # Your imgproxy server.
 
 thumbnail = Transform(
     Resize(width=300, height=300, mode='fill'),  # Pass option objects.
-    quality=80,  # Or scalar keywords, equivalent to Quality(80).
+    quality=80,  # Or scalar, equivalent to Quality(80).
     format='webp',
 )
 thumbnail_url = client.url(
