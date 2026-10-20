@@ -17,6 +17,9 @@
 ## Features
 
 - [x] Fully typed and checked with `mypy`, `pyright`, `ty` and `pyrefly` in strict modes
+- [x] Expressive transforms: combine option objects with concise scalar arguments
+- [x] Immutable, reusable transforms for consistent image settings across your app
+- [x] Support for named presets configured on your imgproxy server
 
 ---------
 
@@ -30,26 +33,50 @@ pip install imgproxykit
 
 ## Example
 
-Build a URL for a WebP thumbnail served by your imgproxy server:
+Define a WebP thumbnail once and reuse it across a product catalog:
 
 ```python
 from imgproxykit import Client, Transform
-from imgproxykit.options import Resize
+from imgproxykit.options import Gravity, Resize
 
 client = Client('https://imgproxy.your-app.com')  # Your imgproxy server.
 
 thumbnail = Transform(
     Resize(width=300, height=300, mode='fill'),  # Pass option objects.
+    Gravity(position='sm'),  # Let imgproxy choose the crop's focus.
     quality=80,  # Or scalar, equivalent to Quality(80).
     format='webp',
 )
-thumbnail_url = client.url(
-    'https://example.com/photo.jpg',
-    transform=thumbnail,
-)
+sources = [
+    'https://example.com/products/backpack.jpg',
+    'https://example.com/products/sneakers.jpg',
+]
+thumbnail_urls = [client.url(source, transform=thumbnail) for source in sources]
 ```
 
-Use `thumbnail_url` in an image's `src`; imgproxy handles the image processing.
+Use these URLs in your images' `src` attributes; imgproxy handles processing.
+
+Sign URLs and reuse presets configured on your imgproxy server:
+
+```python
+from imgproxykit import Client, Transform
+from imgproxykit.options import Preset
+
+client = Client(
+    'https://imgproxy.your-app.com',
+    key='736563726574',  # Example hex credentials; use your server's values.
+    salt='73616c74',
+)
+
+thumbnail = Transform(
+    Preset(names=('product-card',)),
+    format='webp',
+)
+thumbnail_url = client.url(
+    'https://example.com/products/backpack.jpg',
+    transform=product_card,
+)
+```
 
 ## Contributing
 
