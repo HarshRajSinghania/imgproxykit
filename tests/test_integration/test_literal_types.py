@@ -6,7 +6,6 @@ import zapros
 
 from imgproxykit import Client, Transform, options
 from imgproxykit.types import (
-    EMPTY,
     FormatType,
     Position,
     ResizeType,
@@ -116,8 +115,8 @@ def test_position(
             width=_WIDTH,
             height=_HEIGHT,
             gravity=position,
-            offset_x=0.5 if position == 'fp' else EMPTY,
-            offset_y=0.5 if position == 'fp' else EMPTY,
+            offset_x=0.5 if position == 'fp' else None,
+            offset_y=0.5 if position == 'fp' else None,
         ),
     )
     url = imgproxy_client.url(_SOURCE, transform=transform)

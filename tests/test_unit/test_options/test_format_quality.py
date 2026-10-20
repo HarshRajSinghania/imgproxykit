@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import FormatQuality
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -17,4 +17,7 @@ from imgproxykit.options import FormatQuality
 )
 def test_format_quality(*, option: FormatQuality, expected: str) -> None:
     """Ensure that format quality pairs retain their order when flattened."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

@@ -67,11 +67,8 @@ extensions = [
 # You can activate this mode temporarily using the `-n` command-line switch.
 nitpicky = True
 
-# Type annotations expose the sentinel's implementation path, while its
-# public value is documented as ``imgproxykit.types.EMPTY``.
 # Sphinx also treats overload defaults as references to ``Ellipsis``.
 nitpick_ignore = [
-    ('py:class', 'imgproxykit.internal.empty.EMPTY'),
     ('py:data', 'Ellipsis'),
 ]
 

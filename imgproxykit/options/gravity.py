@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType, Position
+from imgproxykit.types import Argument, OptionType, Position
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class Gravity(Option):
     """
     Choose the image area retained when cropping.
 
-    Omitted offsets remain :data:`~imgproxykit.types.EMPTY`.
+    Omitted offsets remain ``None``.
 
     Attributes:
         position: Anchor such as ``ce`` (center), ``sm`` (smart),
@@ -22,7 +22,7 @@ class Gravity(Option):
 
     >>> option = Gravity(position='ce')
     >>> option.arguments
-    ('ce', EMPTY, EMPTY)
+    ('ce', None, None)
     >>> option = Gravity(position='fp', offset_x=0.25, offset_y=0.5)
     >>> option.arguments
     ('fp', 0.25, 0.5)
@@ -39,8 +39,8 @@ class Gravity(Option):
 
     # Public API:
     position: Position
-    offset_x: float | EMPTY = EMPTY
-    offset_y: float | EMPTY = EMPTY
+    offset_x: float | None = None
+    offset_y: float | None = None
 
     # Public API:
     name: ClassVar[OptionType] = 'gravity'

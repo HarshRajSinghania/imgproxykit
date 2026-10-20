@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Background
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -14,4 +14,7 @@ from imgproxykit.options import Background
 )
 def test_background(*, option: Background, expected: str) -> None:
     """Ensure that backgrounds accept hex colors, RGB tuples, and omission."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

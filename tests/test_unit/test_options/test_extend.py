@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Extend
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -22,4 +22,7 @@ from imgproxykit.options import Extend
 )
 def test_extend(*, option: Extend, expected: str) -> None:
     """Ensure that extension retains its flag, anchor, and offset positions."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

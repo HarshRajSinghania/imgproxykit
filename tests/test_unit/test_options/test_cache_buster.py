@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import CacheBuster
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -17,4 +17,7 @@ from imgproxykit.options import CacheBuster
 )
 def test_cache_buster(*, option: CacheBuster, expected: str) -> None:
     """Ensure that cache busters escape reserved characters and Unicode."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

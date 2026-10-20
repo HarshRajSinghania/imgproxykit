@@ -9,7 +9,7 @@ from imgproxykit.types import FormatType, ResizeType
 
 
 class ScalarOptions(TypedDict, total=False, closed=True):
-    """Optional scalar processing arguments accepted by Transform."""
+    """Optional scalar processing arguments accepted by :class:`Transform`."""
 
     auto_rotate: bool
     blur: float
@@ -48,28 +48,18 @@ class Transform:
     """
     Define reusable image processing options.
 
-    Options are serialized in the supplied order. Imgproxy determines the
-    image processing pipeline and resolves omitted option arguments using
-    its defaults.
+    Stores an immutable tuple of options for reuse with
+    :meth:`imgproxykit.Client.url`. Pass option instances or scalar keyword
+    arguments; scalar options follow the positional options in keyword order.
+
+    Options retain their supplied order during serialization. Imgproxy
+    determines the image processing pipeline and resolves omitted arguments
+    using its defaults. Preset options reference names configured on the
+    imgproxy server and are not expanded here.
 
     Attributes:
         options: Tuple of processing options. Defaults to an empty tuple,
             which adds no processing option segments to the URL.
-
-    Usage:
-
-    >>> from imgproxykit import Client, Transform
-    >>> from imgproxykit.options import Format, Quality, Resize
-    >>> thumbnail = Transform(
-    ...     Resize(width=300, height=300, mode='fill'),
-    ...     Quality(85),
-    ...     Format('webp'),
-    ... )
-    >>> client = Client('https://images.example.com')
-    >>> url = client.url(
-    ...     'https://example.com/image.jpg',
-    ...     transform=thumbnail,
-    ... )
 
     """
 
@@ -87,7 +77,30 @@ class Transform:
         *options: Option,
         **kwargs: Unpack[ScalarOptions],
     ) -> None:
-        """Collect positional options, followed by scalar keyword options."""
+        """
+        Collect positional options, followed by scalar keyword options.
+
+        Args:
+            *options: Processing option instances in serialization order.
+                Repeated options are retained without merging.
+            **kwargs: Scalar processing arguments, such as ``quality=85``
+                or ``format='webp'``. Converted to option instances and
+                appended in keyword order.
+
+        Examples:
+            Combine a resize option with scalar quality and format options:
+
+            >>> from imgproxykit import Transform
+            >>> from imgproxykit.options import Resize
+            >>> thumbnail = Transform(
+            ...     Resize(width=96, height=96, mode='fill'),
+            ...     quality=85,
+            ...     format='webp',
+            ... )
+            >>> [option.name for option in thumbnail.options]
+            ['resize', 'quality', 'format']
+
+        """
         # Keep variadic options while initializing a frozen dataclass.
         # Bypassing __setattr__ is safe until initialization is finished.
         scalar_options = tuple(starmap(ScalarOption.from_kwarg, kwargs.items()))

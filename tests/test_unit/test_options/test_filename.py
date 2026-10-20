@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Filename
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -17,4 +17,7 @@ from imgproxykit.options import Filename
 )
 def test_filename(*, option: Filename, expected: str) -> None:
     """Ensure that filenames use Base64 encoding with the encoding flag."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

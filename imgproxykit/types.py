@@ -1,8 +1,6 @@
 from typing import Literal
 
-from imgproxykit.internal.empty import EMPTY as EMPTY  # noqa: PLC0414
-
-type Argument = str | int | float | bool | EMPTY
+type Argument = str | int | float | bool | None
 type FormatType = Literal[
     'png',
     'jpg',

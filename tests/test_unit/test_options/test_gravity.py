@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Gravity
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -21,4 +21,7 @@ from imgproxykit.options import Gravity
 )
 def test_gravity(*, option: Gravity, expected: str) -> None:
     """Ensure that gravity retains its anchor and optional offset positions."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

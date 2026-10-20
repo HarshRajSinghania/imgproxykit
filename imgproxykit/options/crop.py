@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType, Position
+from imgproxykit.types import Argument, OptionType, Position
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -12,7 +12,7 @@ class Crop(Option):
 
     Defines the source area to process before resizing. Omitted gravity
     uses the request gravity; omitted arguments remain
-    :data:`~imgproxykit.types.EMPTY`.
+    ``None``.
 
     Attributes:
         width: Crop width: pixels at or above one, relative below one.
@@ -27,7 +27,7 @@ class Crop(Option):
 
     >>> option = Crop(width=300, height=200, gravity='ce')
     >>> option.arguments
-    (300, 200, 'ce', EMPTY, EMPTY)
+    (300, 200, 'ce', None, None)
     >>> option = Crop(
     ...     width=0.5, height=0.5, gravity='fp', offset_x=0.5, offset_y=0.5
     ... )
@@ -39,11 +39,11 @@ class Crop(Option):
 
     """
 
-    width: float | EMPTY = EMPTY
-    height: float | EMPTY = EMPTY
-    gravity: Position | EMPTY = EMPTY
-    offset_x: float | EMPTY = EMPTY
-    offset_y: float | EMPTY = EMPTY
+    width: float | None = None
+    height: float | None = None
+    gravity: Position | None = None
+    offset_x: float | None = None
+    offset_y: float | None = None
 
     name: ClassVar[OptionType] = 'crop'
 

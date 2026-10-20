@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class Flip(Option):
     """
     Flip the image horizontally and/or vertically.
 
-    Omitted axes remain :data:`~imgproxykit.types.EMPTY` and use
+    Omitted axes remain ``None`` and use
     imgproxy defaults.
 
     Attributes:
@@ -21,7 +21,7 @@ class Flip(Option):
 
     >>> option = Flip(horizontal=True)
     >>> option.arguments
-    (True, EMPTY)
+    (True, None)
     >>> option = Flip(horizontal=True, vertical=True)
     >>> option.arguments
     (True, True)
@@ -31,8 +31,8 @@ class Flip(Option):
 
     """
 
-    horizontal: bool | EMPTY = EMPTY
-    vertical: bool | EMPTY = EMPTY
+    horizontal: bool | None = None
+    vertical: bool | None = None
 
     name: ClassVar[OptionType] = 'flip'
 

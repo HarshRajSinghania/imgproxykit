@@ -2,7 +2,7 @@ import pytest
 from faker import Faker
 
 from imgproxykit import options
-from imgproxykit.internal.serialization import serialize_option
+from imgproxykit.serialization import PathSerializer
 from tests.protocols import OptionFactory
 
 
@@ -32,4 +32,9 @@ def test_integer_options(
     """Ensure that each option uses its protocol prefix and value."""
     value = faker.random_int(min=1, max=100)
 
-    assert serialize_option(option_type(value=value)) == f'{prefix}:{value}'
+    option = option_type(value=value)
+
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == f'{prefix}:{value}'
+    )

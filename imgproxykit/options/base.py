@@ -13,7 +13,7 @@ class Option(ABC):
     Pass their instances to :class:`~imgproxykit.Transform`.
     This abstract class cannot be instantiated directly.
 
-    Arguments retain :data:`~imgproxykit.types.EMPTY` values until
+    Arguments retain ``None`` values until
     serialization: internal gaps keep their positions, while trailing
     empty arguments are omitted.
 

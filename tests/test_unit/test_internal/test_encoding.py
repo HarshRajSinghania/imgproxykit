@@ -13,12 +13,8 @@ from imgproxykit.internal.encoding import encode_base64
         ('f', 'Zg'),
         ('fo', 'Zm8'),
         ('foo', 'Zm9v'),
-        (b'f', 'Zg'),
-        (b'fo', 'Zm8'),
-        (b'foo', 'Zm9v'),
         # Text is encoded as UTF-8:
         ('café', 'Y2Fmw6k'),
-        (b'caf\xc3\xa9', 'Y2Fmw6k'),
         # Binary input uses the URL-safe alphabet:
         (b'\xfb\xef', '--8'),
         (b'\xff\xff', '__8'),

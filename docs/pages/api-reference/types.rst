@@ -12,5 +12,3 @@ Types
 .. autodata:: imgproxykit.types.ResizeType
 
 .. autodata:: imgproxykit.types.WatermarkPosition
-
-.. autodata:: imgproxykit.types.EMPTY

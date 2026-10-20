@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType, ResizeType
+from imgproxykit.types import Argument, OptionType, ResizeType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class Resize(Option):
     """
     Configure image dimensions and resizing behavior.
 
-    Values left as :data:`~imgproxykit.types.EMPTY` are not supplied
+    Values left as ``None`` are not supplied
     explicitly; imgproxy resolves their defaults.
 
     Attributes:
@@ -24,7 +24,7 @@ class Resize(Option):
 
     >>> option = Resize(width=96, height=96, mode='fill')
     >>> option.arguments
-    ('fill', 96, 96, EMPTY, EMPTY)
+    ('fill', 96, 96, None, None)
 
     See `imgproxy resize
     <https://docs.imgproxy.net/usage/processing#resize>`_.
@@ -32,11 +32,11 @@ class Resize(Option):
     """
 
     # Public API:
-    width: int | EMPTY = EMPTY
-    height: int | EMPTY = EMPTY
-    mode: ResizeType | EMPTY = EMPTY
-    enlarge: bool | EMPTY = EMPTY
-    extend: bool | EMPTY = EMPTY
+    width: int | None = None
+    height: int | None = None
+    mode: ResizeType | None = None
+    enlarge: bool | None = None
+    extend: bool | None = None
 
     # Public API:
     name: ClassVar[OptionType] = 'resize'

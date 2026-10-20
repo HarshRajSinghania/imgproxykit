@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -27,14 +27,14 @@ class Background(Option):
     (255, 255, 255)
     >>> option = Background()
     >>> option.arguments
-    (EMPTY,)
+    (None,)
 
     See `imgproxy background
     <https://docs.imgproxy.net/usage/processing#background>`_.
 
     """
 
-    color: str | tuple[int, int, int] | EMPTY = EMPTY
+    color: str | tuple[int, int, int] | None = None
 
     name: ClassVar[OptionType] = 'background'
 

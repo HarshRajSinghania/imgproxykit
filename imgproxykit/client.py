@@ -1,9 +1,8 @@
 from typing import ClassVar, overload
 
-from imgproxykit.builder import PathBuilder
+from imgproxykit.serialization import PathSerializer
 from imgproxykit.signing import UrlSigner
 from imgproxykit.transform import Transform
-from imgproxykit.types import EMPTY
 
 
 class Client:
@@ -14,25 +13,26 @@ class Client:
     images. Each call to :meth:`url` returns a URL string; imgproxy loads
     the source and processes the image when that URL is requested.
 
-    Processing parameters can come from a :class:`~imgproxykit.Transform`
-    containing options and preset names configured on the imgproxy server.
+    Pass processing options through :class:`~imgproxykit.Transform` as
+    option instances or scalar keyword arguments. Preset options reference
+    names configured on the imgproxy server.
 
-    Subclass this client and override :attr:`path_builder_cls` or
-    :attr:`signer_cls` to customize path construction or signing.
+    Subclass this client and override :attr:`path_serializer_cls` or
+    :attr:`url_signer_cls` to customize path construction or signing.
     Each client creates its own instances of these components.
 
     """
 
     __slots__ = (
         '_base_url',
-        '_path_builder',
-        '_signer',
+        '_path_serializer',
+        '_url_signer',
     )
 
     #: Component that resolves processing parameters and builds unsigned paths.
-    path_builder_cls: ClassVar[type[PathBuilder]] = PathBuilder
+    path_serializer_cls: ClassVar[type[PathSerializer]] = PathSerializer
     #: Component that signs paths or returns the unsigned URL marker.
-    signer_cls: ClassVar[type[UrlSigner]] = UrlSigner
+    url_signer_cls: ClassVar[type[UrlSigner]] = UrlSigner
 
     @overload
     def __init__(
@@ -40,6 +40,8 @@ class Client:
         base_url: str,
         /,
         *,
+        key: None = None,
+        salt: None = None,
         unsigned_signature: str = 'unsafe',
     ) -> None: ...
 
@@ -59,8 +61,8 @@ class Client:
         base_url: str,
         /,
         *,
-        key: str | EMPTY = EMPTY,
-        salt: str | EMPTY = EMPTY,
+        key: str | None = None,
+        salt: str | None = None,
         signature_size: int = 32,
         unsigned_signature: str = 'unsafe',
     ) -> None:
@@ -68,44 +70,47 @@ class Client:
         Configure the imgproxy address and create the client components.
 
         Supply both ``key`` and ``salt`` for signed URLs. Omit both for
-        URLs with an ``unsafe`` signature marker, which can be used with
-        an imgproxy server that has signature checking disabled.
+        URLs with the configured unsigned marker (``unsafe`` by default).
+        The server must accept unsigned requests or trust that marker.
 
         Args:
             base_url: Public imgproxy address, including any deployment path
-                prefix. Required positional argument. Trailing slashes
-                are removed.
-            unsigned_signature: URL marker used when key and salt are omitted.
-                Defaults to 'unsafe'. With server signing enabled, configure
-                this marker in IMGPROXY_TRUSTED_SIGNATURES.
-            key: Hex-encoded signing key matching the server configuration.
-            salt: Hex-encoded signing salt matching the server configuration.
+                prefix. Trailing slashes are removed; the address is otherwise
+                stored as supplied, without validation.
+            key: Nonempty hex-encoded signing key matching the server.
+                Supply together with ``salt``; ``None`` selects unsigned mode.
+            salt: Nonempty hex-encoded signing salt matching the server.
+                Supply together with ``key``; ``None`` selects unsigned mode.
             signature_size: Positive digest byte count to encode. Must match
-                the server's IMGPROXY_SIGNATURE_SIZE. Defaults to 32.
+                the server's ``IMGPROXY_SIGNATURE_SIZE``. Defaults to ``32``.
                 Values of 32 or more use the full digest.
+            unsigned_signature: URL marker used when key and salt are omitted.
+                Defaults to ``'unsafe'``. With server signing enabled,
+                configure this marker in ``IMGPROXY_TRUSTED_SIGNATURES``.
 
         Raises:
             ValueError: With the default signer, if only one signing
                 credential is supplied, either is empty or invalid hex,
-                or signature_size is not positive.
+                or ``signature_size`` is not positive, even in unsigned mode.
 
-        Usage:
+        Examples:
+            Create an unsigned client:
 
-        >>> from imgproxykit import Client
-        >>> unsigned = Client('https://images.example.com')
-        >>> signed = Client(
-        ...     'https://images.example.com',
-        ...     key='736563726574',
-        ...     salt='73616c74',
-        ... )
+            >>> from imgproxykit import Client
+            >>> client = Client('https://images.example.com')
 
-        The signing credentials above are examples for local development.
+            Create a signed client with example credentials:
+
+            >>> client = Client(
+            ...     'https://images.example.com',
+            ...     key='736563726574',
+            ...     salt='73616c74',
+            ... )
 
         """
-        # TODO: Define runtime validation for base URLs and empty sources.
-        self._base_url = base_url.rstrip('/')
-        self._path_builder = self.path_builder_cls()
-        self._signer = self.signer_cls(
+        self._base_url = base_url
+        self._path_serializer = self.path_serializer_cls()
+        self._url_signer = self.url_signer_cls(
             key=key,
             salt=salt,
             signature_size=signature_size,
@@ -116,42 +121,33 @@ class Client:
         self,
         source: str,
         *,
-        transform: Transform | EMPTY = EMPTY,
+        transform: Transform | None = None,
     ) -> str:
         """
         Build a URL using processing options and server preset references.
 
-        Pass options, including Preset instances, through ``transform``.
+        Pass option instances or scalar keyword arguments through
+        :class:`~imgproxykit.Transform`. Use
+        :class:`~imgproxykit.options.Preset` to reference server presets.
         Preset definitions remain on the server and are not expanded here.
-        Set the output format with the ``Format`` option. Omitted processing
-        parameters and formats are left to the server.
+        Set the output format with ``Transform(format='webp')`` or a
+        :class:`~imgproxykit.options.Format` option. Omitted processing
+        parameters are left to the server.
 
         Args:
             source: Complete source URI understood by the imgproxy server.
-                The default builder Base64-encodes it without changing its
-                contents or resolving storage-relative paths.
+                The default serializer encodes its UTF-8 representation as
+                URL-safe Base64 without padding. The URI is neither validated
+                nor resolved against ``base_url``.
             transform: Reusable processing options and optional output format.
-                Omit to add no processing options.
+                Omit or pass ``None`` to add no processing options.
 
         Returns:
-            The complete imgproxy URL, signed when credentials were supplied.
-
-        Usage:
-
-        >>> from imgproxykit import Client, Transform
-        >>> from imgproxykit.options import Format, Resize
-        >>> client = Client('https://images.example.com')
-        >>> thumbnail = Transform(
-        ...     Resize(width=300, height=300, mode='fill'),
-        ...     Format('webp'),
-        ... )
-        >>> source = 'https://example.com/photo.jpg'
-        >>> local_options_url = client.url(source, transform=thumbnail)
-
+            The complete imgproxy URL, signed when credentials were supplied
+            or containing the unsigned marker otherwise. No network request
+            is made.
         """
-        path = self._path_builder(
-            source,
-            transform=transform,
-        )
-        signature = self._signer(path)
-        return f'{self._base_url}/{signature}{path}'
+        path = self._path_serializer(source, transform=transform)
+        signature = self._url_signer(path)
+        base_url = self._base_url.rstrip('/')
+        return f'{base_url}/{signature}{path}'

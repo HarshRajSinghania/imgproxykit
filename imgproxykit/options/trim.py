@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -12,7 +12,7 @@ class Trim(Option):
 
     Removes the surrounding background before resizing. Trimming loads
     the full image into memory and is unsupported for animated images.
-    Omitted settings remain :data:`~imgproxykit.types.EMPTY`.
+    Omitted settings remain ``None``.
 
     Attributes:
         threshold: Color similarity tolerance.
@@ -25,7 +25,7 @@ class Trim(Option):
 
     >>> option = Trim(threshold=10, color='ffffff', equal_hor=True)
     >>> option.arguments
-    (10, 'ffffff', True, EMPTY)
+    (10, 'ffffff', True, None)
 
     See `imgproxy trim
     <https://docs.imgproxy.net/usage/processing#trim>`_.
@@ -33,9 +33,9 @@ class Trim(Option):
     """
 
     threshold: float
-    color: str | EMPTY = EMPTY
-    equal_hor: bool | EMPTY = EMPTY
-    equal_ver: bool | EMPTY = EMPTY
+    color: str | None = None
+    equal_hor: bool | None = None
+    equal_ver: bool | None = None
 
     name: ClassVar[OptionType] = 'trim'
 

@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Flip
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -14,4 +14,7 @@ from imgproxykit.options import Flip
 )
 def test_flip(*, option: Flip, expected: str) -> None:
     """Ensure that flip axes retain positions and explicit false values."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

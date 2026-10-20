@@ -85,7 +85,10 @@ quote-style = "single"
 docstring-code-format = true
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*.py" = [ "S101" ]
+"tests/*.py" = [
+  "S101",   # allow assert statements in tests
+  "SLF001", # allow tests to inspect private members
+]
 
 [tool.ruff.lint]
 select = [
@@ -229,10 +232,14 @@ venv = ".venv"
 venvPath = "."
 typeCheckingMode = "strict"
 include = [ "imgproxykit", "tests" ]
-# Older basedpyright versions gate PEP 661 sentinels behind this flag.
-enableExperimentalFeatures = true
 enableTypeIgnoreComments = false
 reportUnnecessaryTypeIgnoreComment = "error"
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+extraPaths = [ "." ]
+# Allow tests to inspect private members.
+reportPrivateUsage = false
 
 
 [tool.pytest.ini_options]

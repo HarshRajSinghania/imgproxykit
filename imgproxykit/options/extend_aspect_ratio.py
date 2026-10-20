@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType, Position
+from imgproxykit.types import Argument, OptionType, Position
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class ExtendAspectRatio(Option):
     """
     Extend the canvas to the requested aspect ratio.
 
-    Omitted settings remain :data:`~imgproxykit.types.EMPTY`. The default
+    Omitted settings remain ``None``. The default
     anchor is center without offsets; smart gravity is unsupported.
 
     Attributes:
@@ -23,7 +23,7 @@ class ExtendAspectRatio(Option):
 
     >>> option = ExtendAspectRatio(value=True, gravity='so')
     >>> option.arguments
-    (True, 'so', EMPTY, EMPTY)
+    (True, 'so', None, None)
 
     See `imgproxy extend aspect ratio
     <https://docs.imgproxy.net/usage/processing#extend-aspect-ratio>`_.
@@ -31,9 +31,9 @@ class ExtendAspectRatio(Option):
     """
 
     value: bool
-    gravity: Position | EMPTY = EMPTY
-    offset_x: float | EMPTY = EMPTY
-    offset_y: float | EMPTY = EMPTY
+    gravity: Position | None = None
+    offset_x: float | None = None
+    offset_y: float | None = None
 
     name: ClassVar[OptionType] = 'extend_aspect_ratio'
 

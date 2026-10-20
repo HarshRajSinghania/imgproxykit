@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType, WatermarkPosition
+from imgproxykit.types import Argument, OptionType, WatermarkPosition
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class Watermark(Option):
     """
     Apply the watermark image configured on the imgproxy server.
 
-    Omitted settings remain :data:`~imgproxykit.types.EMPTY` and are
+    Omitted settings remain ``None`` and are
     resolved by the server.
 
     Attributes:
@@ -27,7 +27,7 @@ class Watermark(Option):
     ...     opacity=0.5, position='soea', offset_x=10, offset_y=10
     ... )
     >>> option.arguments
-    (0.5, 'soea', 10, 10, EMPTY)
+    (0.5, 'soea', 10, 10, None)
 
     See `imgproxy watermark
     <https://docs.imgproxy.net/usage/processing#watermark>`_
@@ -38,10 +38,10 @@ class Watermark(Option):
 
     # Public API:
     opacity: float
-    position: WatermarkPosition | EMPTY = EMPTY
-    offset_x: float | EMPTY = EMPTY
-    offset_y: float | EMPTY = EMPTY
-    scale: float | EMPTY = EMPTY
+    position: WatermarkPosition | None = None
+    offset_x: float | None = None
+    offset_y: float | None = None
+    scale: float | None = None
 
     # Public API:
     name: ClassVar[OptionType] = 'watermark'

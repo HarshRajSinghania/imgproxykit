@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Resize
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -24,4 +24,7 @@ from imgproxykit.options import Resize
 )
 def test_resize(*, option: Resize, expected: str) -> None:
     """Ensure that resize arguments follow protocol order and retain gaps."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

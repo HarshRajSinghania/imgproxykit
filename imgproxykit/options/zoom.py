@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -22,7 +22,7 @@ class Zoom(Option):
 
     >>> option = Zoom(factor_x=2)
     >>> option.arguments
-    (2, EMPTY)
+    (2, None)
     >>> option = Zoom(factor_x=2, factor_y=1.5)
     >>> option.arguments
     (2, 1.5)
@@ -33,7 +33,7 @@ class Zoom(Option):
     """
 
     factor_x: float
-    factor_y: float | EMPTY = EMPTY
+    factor_y: float | None = None
 
     name: ClassVar[OptionType] = 'zoom'
 

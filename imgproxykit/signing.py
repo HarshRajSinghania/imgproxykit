@@ -1,9 +1,12 @@
 import contextlib
 import hmac
+from typing import Final
 
-from imgproxykit.internal.constants import SIGNATURE_DIGEST
 from imgproxykit.internal.encoding import encode_base64
-from imgproxykit.types import EMPTY
+
+# TODO: move to init?
+# imgproxy verifies URL signatures using HMAC-SHA256.
+_SIGNATURE_DIGEST: Final = 'sha256'
 
 
 class UrlSigner:
@@ -15,7 +18,7 @@ class UrlSigner:
     subsequent signatures. Omitting both credentials enables unsigned mode.
 
     Subclass this signer and override :meth:`__call__` to customize signing.
-    Set the subclass on :attr:`imgproxykit.Client.signer_cls` to use it
+    Set the subclass on :attr:`imgproxykit.Client.url_signer_cls` to use it
     in a client.
 
     """
@@ -29,56 +32,48 @@ class UrlSigner:
     def __init__(
         self,
         *,
-        key: str | EMPTY = EMPTY,
-        salt: str | EMPTY = EMPTY,
+        key: str | None = None,
+        salt: str | None = None,
         signature_size: int = 32,
         unsigned_signature: str = 'unsafe',
     ) -> None:
         """
         Configure signing credentials or enable unsigned mode.
 
-        Supply both credentials to generate signatures. Omit both to return
-        the configured unsigned marker (``unsafe`` by default).
+        Supply both ``key`` and ``salt`` to generate signatures. Omit both to
+        return the configured unsigned marker (``unsafe`` by default).
+        The server must accept unsigned requests or trust that marker.
 
         Args:
-            unsigned_signature: Marker returned without signing credentials.
-                Defaults to 'unsafe'; custom values must be trusted by server.
             key: Nonempty hex-encoded signing key matching the server.
+                Supply together with ``salt``; ``None`` selects unsigned mode.
             salt: Nonempty hex-encoded signing salt matching the server.
+                Supply together with ``key``; ``None`` selects unsigned mode.
             signature_size: Positive digest byte count to encode. Must match
-                the server's IMGPROXY_SIGNATURE_SIZE. Defaults to 32.
+                the server's ``IMGPROXY_SIGNATURE_SIZE``. Defaults to ``32``.
                 Values of 32 or more use the full digest.
+            unsigned_signature: URL marker used when key and salt are omitted.
+                Defaults to ``'unsafe'``. With server signing enabled,
+                configure this marker in ``IMGPROXY_TRUSTED_SIGNATURES``.
 
         Raises:
-            ValueError: If only one credential is supplied, or either
-                credential is empty or contains invalid hexadecimal data,
-                or signature_size is not positive.
-
-        Usage:
-
-        >>> from imgproxykit.signing import UrlSigner
-        >>> unsigned = UrlSigner()
-        >>> signed = UrlSigner(
-        ...     key='736563726574',
-        ...     salt='73616c74',
-        ... )
-
-        These credentials are examples for local development.
-
+            ValueError: If only one signing credential is supplied, either
+                is empty or invalid hex, or ``signature_size`` is not
+                positive, even in unsigned mode.
         """
         # Signing requires a positive digest byte count.
         if signature_size < 1:
             raise ValueError('signature_size must be positive.')
 
         # Signing requires a complete key and salt pair.
-        if (key is EMPTY) != (salt is EMPTY):
+        if (key is None) != (salt is None):
             raise ValueError('key and salt must be supplied together.')
 
         self._unsigned_signature = unsigned_signature
         self._signature_size = signature_size
 
         # Omitting both credentials selects unsigned mode.
-        if key is EMPTY or salt is EMPTY:
+        if key is None or salt is None:
             self._credentials = None
             return
 
@@ -111,7 +106,7 @@ class UrlSigner:
         signature = hmac.digest(
             key,
             salt + path.encode(),
-            SIGNATURE_DIGEST,
+            _SIGNATURE_DIGEST,
         )
         return encode_base64(signature[: self._signature_size])
 

@@ -1,7 +1,7 @@
 import pytest
 
 from imgproxykit import options
-from imgproxykit.internal.serialization import serialize_option
+from imgproxykit.serialization import PathSerializer
 from tests.protocols import OptionFactory
 
 
@@ -27,6 +27,9 @@ def test_boolean_options(
     value: bool,
 ) -> None:
     """Ensure that boolean options serialize enabled and disabled values."""
+    option = option_type(value=value)
+
     assert (
-        serialize_option(option_type(value=value)) == f'{prefix}:{int(value)}'
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == f'{prefix}:{int(value)}'
     )

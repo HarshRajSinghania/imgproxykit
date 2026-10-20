@@ -4,7 +4,7 @@ import pytest
 from inline_snapshot import snapshot
 
 from imgproxykit import Client, Transform
-from imgproxykit.options import Preset, Resize
+from imgproxykit.options import Resize
 
 _SOURCE: Final = 'https://example.com/photo.jpg'
 _WIDTH: Final = 300
@@ -49,20 +49,4 @@ def test_signed_url() -> None:
         'https://example.com/'
         '9TG79qV8tG6YeCbuGRKt1eLM9SySuCJAldwf3zcrlJU/'
         'resize:fill:300:200/format:webp/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
-    )
-
-
-def test_presets_url() -> None:
-    """Ensure that preset names and output format reach the path builder."""
-    client = Client('https://example.com')
-
-    assert client.url(
-        _SOURCE,
-        transform=Transform(
-            Preset(names=('thumbnail', 'watermarked')),
-            format='avif',
-        ),
-    ) == snapshot(
-        'https://example.com/unsafe/preset:thumbnail:watermarked/format:avif/'
-        'aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc',
     )

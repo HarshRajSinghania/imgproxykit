@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -10,7 +10,7 @@ class Size(Option):
     """
     Set target dimensions, upscaling, and canvas extension.
 
-    Values left as :data:`~imgproxykit.types.EMPTY` are not supplied
+    Values left as ``None`` are not supplied
     explicitly; imgproxy resolves their defaults.
 
     Attributes:
@@ -23,17 +23,17 @@ class Size(Option):
 
     >>> option = Size(width=300, height=200, enlarge=True)
     >>> option.arguments
-    (300, 200, True, EMPTY)
+    (300, 200, True, None)
 
     See `imgproxy size
     <https://docs.imgproxy.net/usage/processing#size>`_.
 
     """
 
-    width: int | EMPTY = EMPTY
-    height: int | EMPTY = EMPTY
-    enlarge: bool | EMPTY = EMPTY
-    extend: bool | EMPTY = EMPTY
+    width: int | None = None
+    height: int | None = None
+    enlarge: bool | None = None
+    extend: bool | None = None
 
     name: ClassVar[OptionType] = 'size'
 

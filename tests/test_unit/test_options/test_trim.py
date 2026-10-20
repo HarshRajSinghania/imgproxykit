@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Trim
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -22,4 +22,7 @@ from imgproxykit.options import Trim
 )
 def test_trim(*, option: Trim, expected: str) -> None:
     """Ensure that trim retains its threshold, color, and symmetry flags."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

@@ -1,7 +1,7 @@
 import pytest
 
-from imgproxykit.internal.serialization import serialize_option
 from imgproxykit.options import Watermark
+from imgproxykit.serialization import PathSerializer
 
 
 @pytest.mark.parametrize(
@@ -23,4 +23,7 @@ from imgproxykit.options import Watermark
 )
 def test_watermark(*, option: Watermark, expected: str) -> None:
     """Ensure that watermark arguments retain their order and omitted slots."""
-    assert serialize_option(option) == expected
+    assert (
+        PathSerializer._serialize_segment(option.name, option.arguments)
+        == expected
+    )

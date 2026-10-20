@@ -1,7 +1,6 @@
 import pytest
 
 from imgproxykit.signing import UrlSigner
-from imgproxykit.types import EMPTY
 
 
 @pytest.fixture
@@ -49,8 +48,8 @@ def test_incomplete_credentials(
         ValueError, match='key and salt must be supplied together'
     ):
         UrlSigner(
-            key=EMPTY if credential == 'key' else credentials['key'],
-            salt=EMPTY if credential == 'salt' else credentials['salt'],
+            key=None if credential == 'key' else credentials['key'],
+            salt=None if credential == 'salt' else credentials['salt'],
         )
 
 

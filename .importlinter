@@ -16,15 +16,13 @@ layers =
   # Coordinate path construction and signing:
   client
   # Independent client components:
-  builder | signing
-  # Serialize processing options:
-  internal.serialization
+  serialization | signing
   # Reusable processing configuration:
   transform
   options
   types
   # Shared low-level utilities:
-  internal.constants | internal.encoding | internal.empty
+  internal.encoding
 
 [importlinter:contract:options-independence]
 name = Concrete processing options must be independent
@@ -45,7 +43,6 @@ source_modules =
   imgproxykit.signing
 
 forbidden_modules =
-  imgproxykit.builder
+  imgproxykit.serialization
   imgproxykit.transform
   imgproxykit.options
-  imgproxykit.internal.serialization

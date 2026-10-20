@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, override
 
 from imgproxykit.options.base import Option
-from imgproxykit.types import EMPTY, Argument, OptionType
+from imgproxykit.types import Argument, OptionType
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -13,7 +13,7 @@ class Padding(Option):
     Uses CSS side order and is applied after image transformations,
     except watermarking. Padding follows DPR and uses the background color.
     Supply at least one side; omitted arguments remain
-    :data:`~imgproxykit.types.EMPTY`.
+    ``None``.
 
     Attributes:
         top: Top padding in pixels; fallback for omitted sides.
@@ -25,7 +25,7 @@ class Padding(Option):
 
     >>> option = Padding(top=10)
     >>> option.arguments
-    (10, EMPTY, EMPTY, EMPTY)
+    (10, None, None, None)
     >>> option = Padding(top=10, right=20, bottom=30, left=40)
     >>> option.arguments
     (10, 20, 30, 40)
@@ -35,10 +35,10 @@ class Padding(Option):
 
     """
 
-    top: int | EMPTY = EMPTY
-    right: int | EMPTY = EMPTY
-    bottom: int | EMPTY = EMPTY
-    left: int | EMPTY = EMPTY
+    top: int | None = None
+    right: int | None = None
+    bottom: int | None = None
+    left: int | None = None
 
     name: ClassVar[OptionType] = 'padding'
 

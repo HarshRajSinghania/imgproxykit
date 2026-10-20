@@ -2,13 +2,13 @@ Extension points
 ================
 
 Customize URL generation by subclassing these components and assigning them
-to :attr:`imgproxykit.Client.path_builder_cls` or
-:attr:`imgproxykit.Client.signer_cls`.
+to :attr:`imgproxykit.Client.path_serializer_cls` or
+:attr:`imgproxykit.Client.url_signer_cls`.
 
-Path builder
-------------
+Path serializer
+---------------
 
-.. autoclass:: imgproxykit.builder.PathBuilder
+.. autoclass:: imgproxykit.serialization.PathSerializer
    :members:
    :special-members: __call__
 
