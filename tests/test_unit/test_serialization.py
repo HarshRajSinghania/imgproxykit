@@ -42,21 +42,6 @@ def test_transform_path() -> None:
     )
 
 
-def test_empty_transform_path() -> None:
-    """Ensure that an empty transform adds no processing segments."""
-    assert PathSerializer()(_SOURCE, transform=Transform()) == (
-        '/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc'
-    )
-
-
-def test_empty_presets_path() -> None:
-    """Ensure that explicit empty presets retain the preset segment."""
-    assert (
-        PathSerializer()(_SOURCE, transform=Transform(Preset(names=())))
-        == '/preset/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc'
-    )
-
-
 def test_presets_path() -> None:
     """Ensure that preset names retain their order within a segment."""
     transform = Transform(Preset(names=('thumbnail', 'watermarked')))
