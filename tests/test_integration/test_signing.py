@@ -1,30 +1,30 @@
 from http import HTTPStatus
-from typing import Final
+from typing import Final, Literal
 
 import pytest
 import zapros
 
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
+from tests.fixtures.credentials import Credentials
 from tests.test_integration.assertions import assert_image
 
 _WIDTH: Final = 160
 _HEIGHT: Final = 120
 
 
-@pytest.mark.parametrize(
-    ('key', 'salt'),
-    [('00', '73616c74'), ('736563726574', '00')],
-)
+@pytest.mark.parametrize('credential', ['key', 'salt'])
 def test_invalid_credentials(
+    credentials: Credentials,
     imgproxy_url: str,
     http_client: zapros.Client,
     *,
-    key: str,
-    salt: str,
+    credential: Literal['key', 'salt'],
 ) -> None:
     """Ensure that imgproxy rejects signatures with a wrong key or salt."""
-    client = Client(imgproxy_url, key=key, salt=salt)
+    changed = credentials.copy()
+    changed[credential] = '00'
+    client = Client(imgproxy_url, **changed)
 
     response = http_client.get(client.url('local:///source.png'))
 

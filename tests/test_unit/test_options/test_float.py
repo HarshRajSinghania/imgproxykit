@@ -3,7 +3,7 @@ from faker import Faker
 
 from imgproxykit import options
 from imgproxykit.serialization import PathSerializer
-from tests.protocols import OptionFactory
+from tests.infra import OptionFactory
 
 
 @pytest.mark.parametrize(

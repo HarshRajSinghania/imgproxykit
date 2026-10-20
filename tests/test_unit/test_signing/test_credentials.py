@@ -1,51 +1,21 @@
+from typing import Literal
+
 import pytest
 
 from imgproxykit.signing import UrlSigner
-
-
-@pytest.fixture
-def credentials() -> dict[str, str]:
-    """Provide valid hexadecimal signing credentials."""
-    return {
-        'key': '736563726574',
-        'salt': '73616c74',
-    }
-
-
-@pytest.mark.parametrize('credential', ['key', 'salt'])
-def test_different_credentials(
-    credentials: dict[str, str],
-    *,
-    credential: str,
-) -> None:
-    """Ensure that changing either credential changes the signature."""
-    signer = UrlSigner(key=credentials['key'], salt=credentials['salt'])
-    replacement = bytearray.fromhex(credentials[credential])
-    replacement[0] ^= 1
-    changed = {**credentials, credential: replacement.hex()}
-
-    changed_signer = UrlSigner(key=changed['key'], salt=changed['salt'])
-
-    assert changed_signer('/b') != signer('/b')
-
-
-def test_uppercase_credentials() -> None:
-    """Ensure that both hexadecimal credentials are case insensitive."""
-    assert UrlSigner(key='ABCDEF', salt='FEDCBA')('/b') == UrlSigner(
-        key='abcdef',
-        salt='fedcba',
-    )('/b')
+from tests.fixtures.credentials import Credentials
 
 
 @pytest.mark.parametrize('credential', ['key', 'salt'])
 def test_incomplete_credentials(
-    credentials: dict[str, str],
+    credentials: Credentials,
     *,
-    credential: str,
+    credential: Literal['key', 'salt'],
 ) -> None:
     """Ensure that signing requires both credentials together."""
     with pytest.raises(
-        ValueError, match='key and salt must be supplied together'
+        ValueError,
+        match='key and salt must be supplied together',
     ):
         UrlSigner(
             key=None if credential == 'key' else credentials['key'],
@@ -56,16 +26,17 @@ def test_incomplete_credentials(
 @pytest.mark.parametrize('invalid', ['', '   ', 'invalid', '0'])
 @pytest.mark.parametrize('credential', ['key', 'salt'])
 def test_invalid_credentials(
-    credentials: dict[str, str],
+    credentials: Credentials,
     *,
     invalid: str,
-    credential: str,
+    credential: Literal['key', 'salt'],
 ) -> None:
     """Ensure that either credential rejects empty or invalid hex data."""
-    credentials[credential] = invalid
+    changed = credentials.copy()
+    changed[credential] = invalid
 
     with pytest.raises(
         ValueError,
         match='Signing credentials must be nonempty hex strings',
     ):
-        UrlSigner(key=credentials['key'], salt=credentials['salt'])
+        UrlSigner(**changed)

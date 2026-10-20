@@ -5,17 +5,19 @@ from inline_snapshot import snapshot
 
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
+from tests.fixtures.credentials import Credentials
 
 _SOURCE: Final = 'https://example.com/photo.jpg'
-_WIDTH: Final = 300
-_HEIGHT: Final = 200
 
 
 @pytest.mark.parametrize(
     'base_url',
     [
+        # A prefix without a trailing slash is preserved.
         'https://example.com/images',
+        # A single trailing slash is removed.
         'https://example.com/images/',
+        # Multiple trailing slashes are removed.
         'https://example.com/images///',
     ],
 )
@@ -29,19 +31,14 @@ def test_unsigned_url(*, base_url: str) -> None:
     )
 
 
-def test_signed_url() -> None:
+def test_signed_url(credentials: Credentials) -> None:
     """Ensure that the complete processing path is signed."""
     client = Client(
         'https://example.com',
-        key='736563726574',
-        salt='73616c74',
+        **credentials,
     )
     transform = Transform(
-        Resize(
-            width=_WIDTH,
-            height=_HEIGHT,
-            mode='fill',
-        ),
+        Resize(width=300, height=200, mode='fill'),
         format='webp',
     )
 

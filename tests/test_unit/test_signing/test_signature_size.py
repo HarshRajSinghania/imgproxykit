@@ -1,11 +1,7 @@
-from typing import Final
-
 import pytest
 
 from imgproxykit.signing import UrlSigner
-
-_KEY: Final = '736563726574'
-_SALT: Final = '73616c74'
+from tests.fixtures.credentials import Credentials
 
 
 @pytest.mark.parametrize(
@@ -17,9 +13,14 @@ _SALT: Final = '73616c74'
         (33, 'pEIkEjcNKr42hrTpB8MBu9UnfgKo7uw7t_x-6he7lc8'),
     ],
 )
-def test_signature_size(*, signature_size: int, expected: str) -> None:
+def test_signature_size(
+    credentials: Credentials,
+    *,
+    signature_size: int,
+    expected: str,
+) -> None:
     """Ensure that digest bytes are truncated before Base64 encoding."""
-    signer = UrlSigner(key=_KEY, salt=_SALT, signature_size=signature_size)
+    signer = UrlSigner(**credentials, signature_size=signature_size)
 
     assert signer('/b') == expected
 

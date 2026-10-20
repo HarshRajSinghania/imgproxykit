@@ -1,11 +1,7 @@
-from typing import Final
-
 import pytest
 
 from imgproxykit.signing import UrlSigner
-
-_KEY: Final = '736563726574'
-_SALT: Final = '73616c74'
+from tests.fixtures.credentials import Credentials
 
 
 def test_unsigned_path() -> None:
@@ -28,17 +24,19 @@ def test_unsigned_path() -> None:
         ('/b', 'pEIkEjcNKr42hrTpB8MBu9UnfgKo7uw7t_x-6he7lc8'),
     ],
 )
-def test_signed_path(*, path: str, expected: str) -> None:
+def test_signed_path(
+    credentials: Credentials, *, path: str, expected: str
+) -> None:
     """Ensure that the exact UTF-8 path matches independent test vectors."""
     # Vectors use OpenSSL HMAC-SHA256 with key b'secret' and salt b'salt'.
-    signer = UrlSigner(key=_KEY, salt=_SALT)
+    signer = UrlSigner(**credentials)
 
     assert signer(path) == expected
 
 
-def test_signer_reuse() -> None:
+def test_signer_reuse(credentials: Credentials) -> None:
     """Ensure that signing another path does not change previous signatures."""
-    signer = UrlSigner(key=_KEY, salt=_SALT)
+    signer = UrlSigner(**credentials)
 
     path = '/first'
     signature = signer(path)
