@@ -47,11 +47,11 @@ thumbnail = Transform(
     quality=80,  # Or scalar, equivalent to Quality(80).
     format='webp',
 )
-sources = [
+images = [
     'https://example.com/products/backpack.jpg',
     'https://example.com/products/sneakers.jpg',
 ]
-thumbnail_urls = [client.url(source, transform=thumbnail) for source in sources]
+thumbnail_urls = [client.url(image, transform=thumbnail) for image in images]
 ```
 
 Use these URLs in your images' `src` attributes; imgproxy handles processing.
@@ -74,7 +74,7 @@ thumbnail = Transform(
 )
 thumbnail_url = client.url(
     'https://example.com/products/backpack.jpg',
-    transform=product_card,
+    transform=thumbnail,
 )
 ```
 

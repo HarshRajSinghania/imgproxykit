@@ -10,6 +10,6 @@ Preserve repeated options and append scalar keyword options.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Quality
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 transform = Transform(Quality(80), Quality(90), quality=85)
 url = client.url('https://example.com/photo.jpg', transform=transform)

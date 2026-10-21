@@ -103,12 +103,12 @@ class Client:
             Create an unsigned client:
 
             >>> from imgproxykit import Client
-            >>> client = Client('https://images.example.com')
+            >>> client = Client('https://imgproxykit.url.com')
 
             Create a signed client with example credentials:
 
             >>> client = Client(
-            ...     'https://images.example.com',
+            ...     'https://imgproxykit.url.com',
             ...     key='736563726574',
             ...     salt='73616c74',
             ... )

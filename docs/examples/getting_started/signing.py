@@ -1,19 +1,19 @@
 """
 Sign a URL with example credentials.
 
->>> url.startswith('https://images.example.com/unsafe/')
+>>> url.startswith('https://imgproxykit.url.com/unsafe/')
 False
->>> url == client.url(source)
+>>> url == client.url(image)
 True
 """
 
 from imgproxykit import Client
 
 client = Client(
-    'https://images.example.com',
+    'https://imgproxykit.url.com',
     key='736563726574',
     salt='73616c74',
 )
-source = 'https://example.com/photo.jpg'
+image = 'https://example.com/photo.jpg'
 
-url = client.url(source)
+url = client.url(image)

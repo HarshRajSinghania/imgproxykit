@@ -8,7 +8,7 @@ Create a small blurred preview.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 preview = Transform(
     Resize(width=32, height=32, mode='fit'),
     blur=2,

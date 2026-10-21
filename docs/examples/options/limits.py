@@ -7,7 +7,7 @@ Set per-request source limits.
 
 from imgproxykit import Client, Transform
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 limited = Transform(
     max_src_resolution=20,
     max_src_file_size=5_000_000,

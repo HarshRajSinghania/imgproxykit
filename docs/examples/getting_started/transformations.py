@@ -8,11 +8,11 @@ Resize an image and select its output format.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
 
-client = Client('https://images.example.com')
-source = 'https://example.com/photo.jpg'
+client = Client('https://imgproxykit.url.com')
+image = 'https://example.com/photo.jpg'
 thumbnail = Transform(
     Resize(width=300, height=300, mode='fill'),
     format='webp',
 )
 
-url = client.url(source, transform=thumbnail)
+url = client.url(image, transform=thumbnail)

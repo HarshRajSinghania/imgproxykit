@@ -8,7 +8,7 @@ Select JPEG output with a white background.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Background
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 jpeg = Transform(
     Background(color='ffffff'),
     format='jpg',

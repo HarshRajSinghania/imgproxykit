@@ -2,14 +2,14 @@
 Match a server configured with a comma as its arguments separator.
 
 >>> url
-'https://images.example.com/unsafe/resize,fill,300,200/format,webp/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc'
+'https://imgproxykit.url.com/unsafe/resize,fill,300,200/format,webp/aHR0cHM6Ly9leGFtcGxlLmNvbS9waG90by5qcGc'
 """
 
 from imgproxykit import Client, Transform
 from imgproxykit.options import Resize
 
 client = Client(
-    'https://images.example.com',
+    'https://imgproxykit.url.com',
     arguments_separator=',',
 )
 url = client.url(

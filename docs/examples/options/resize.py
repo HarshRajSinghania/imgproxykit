@@ -8,7 +8,7 @@ Combine a square crop, gravity, and pixel density.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Gravity, Resize
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 thumbnail = Transform(
     Resize(width=300, height=300, mode='fill'),
     Gravity(position='ce'),

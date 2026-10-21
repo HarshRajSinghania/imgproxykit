@@ -10,7 +10,7 @@ Match a server configured with a 16-byte signature.
 from imgproxykit import Client
 
 client = Client(
-    'https://images.example.com',
+    'https://imgproxykit.url.com',
     key='736563726574',
     salt='73616c74',
     signature_size=16,

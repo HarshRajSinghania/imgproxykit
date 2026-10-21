@@ -8,7 +8,7 @@ Combine server preset references with processing options.
 from imgproxykit import Client, Transform
 from imgproxykit.options import Preset
 
-client = Client('https://images.example.com')
+client = Client('https://imgproxykit.url.com')
 thumbnail = Transform(
     Preset('thumbnail', 'watermarked'),
     quality=85,
