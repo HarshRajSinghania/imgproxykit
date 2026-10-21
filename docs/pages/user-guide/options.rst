@@ -99,11 +99,33 @@ This requests a source limit of 20 megapixels and 5,000,000 bytes.
 Configure server-wide limits on imgproxy when per-request overrides are not
 needed.
 
-Other options
--------------
+URL behavior and presets
+------------------------
 
+These options control behavior beyond image dimensions and encoding:
+
+* ``Preset`` references named settings on the server. See
+  :ref:`server-presets` for an example combining presets with other options.
 * ``Expires`` sets an expiration time as a Unix timestamp, a timezone-aware ``datetime``, or a ``timedelta`` relative to now.
 * ``CacheBuster`` changes the URL to distinguish cached variants.
 * ``Filename`` and ``ReturnAttachment`` control download-related behavior.
 * ``Raw`` and ``SkipProcessing`` control serving the source without the usual
   processing; consult their API entries for the differences.
+
+Omitted and explicit values
+---------------------------
+
+Omitted option arguments remain ``None`` and leave their values to imgproxy.
+Explicit ``False`` and zero values are preserved in the URL; they are not
+silently omitted. Booleans are serialized as ``1`` or ``0``.
+
+Type annotations describe accepted argument types. They do not imply that
+every value is validated at runtime or that the server supports every option.
+Refer to each option's documentation for its meaning and requirements.
+
+Next steps
+----------
+
+* :doc:`../api-reference/options` — all built-in options and their arguments.
+* :doc:`../api-reference/types` — supported formats, positions, and other values.
+* :doc:`transformations` — reuse options and combine them with presets.
