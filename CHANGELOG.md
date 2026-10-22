@@ -8,7 +8,7 @@ After `Development Status :: 4 - Beta` we will still break things
 but with a deprecation period.
 
 
-## 0.3.0 WIP
+## 0.3.0
 
 ### Breaking changes
 
