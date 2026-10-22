@@ -1,8 +1,8 @@
 Getting started
 ===============
 
-Build your first imgproxy URL, add image transformations, and configure
-signing. You will need an imgproxy server to serve the resulting URLs.
+Build a transformed image URL, then define reusable variants for your
+application. You will need an imgproxy server to serve the resulting URLs.
 
 Installation
 ------------
@@ -29,82 +29,69 @@ imgproxykit requires Python 3.12 or newer:
 
       pip install imgproxykit
 
+.. tip::
+
+    To try the examples locally, start a test imgproxy container with Docker:
+
+    .. code-block:: bash
+
+        docker run -d --rm \
+          --name imgproxy-test \
+          -p 127.0.0.1:8080:8080 \
+          ghcr.io/imgproxy/imgproxy:latest
+
+    The examples below connect to this container at ``http://localhost:8080``.
+    It accepts unsigned URLs without additional configuration.
+
+    See the `imgproxy installation guide
+    <https://docs.imgproxy.net/latest/installation>`__ for other setup options.
+
 .. _quick-start:
 
-Your first URL
---------------
+Build a thumbnail
+-----------------
 
-Create a client with your imgproxy server's public address, then pass a source
-image URL to :meth:`~imgproxykit.Client.url`:
+Connect :class:`~imgproxykit.Client` to the local container and describe a
+thumbnail with :class:`~imgproxykit.Transform`. The source is a public sample
+image; you can replace it with another image URL accessible to imgproxy:
 
-.. literalinclude:: /examples/getting_started/first_url.py
+.. literalinclude:: /examples/getting_started/local_thumbnail.py
    :language: python
    :start-at: from imgproxykit
 
-.. note::
+The example prints a URL pointing to your local imgproxy server. Open it in
+your browser to view the 300×300 WebP thumbnail.
 
-    The examples use ``imgproxy.example.com`` for your imgproxy server and
-    ``originals.example.com`` for the original images. Replace these example
-    addresses with your own.
+Build variants
+--------------
+
+To generate several sizes of the same image, define a set of transformations.
+Reuse ``client`` and ``source_url`` from above, keep quality and format in a
+base transformation, then unpack
+``base.options`` into a complete transformation for each width:
+
+.. literalinclude:: /examples/getting_started/variants.py
+   :language: python
+   :start-at: from imgproxykit
+
+The example prints three URLs for widths of 320, 640, and 1280 pixels.
+Open them to compare the sizes; each image keeps the source proportions
+and uses the shared WebP format and quality setting.
 
 .. tip::
 
-    The result is a URL string. Building it makes no network requests: imgproxy
-    fetches and processes the source image when someone requests that URL.
-    The source must be accessible to your imgproxy server.
+    When finished, stop the test container:
 
-Without signing credentials, the client uses the ``unsafe`` marker.
-Your server must accept unsigned URLs for this example to work.
+    .. code-block:: bash
 
-Add transformations
--------------------
+        docker stop imgproxy-test
 
-Use :class:`~imgproxykit.Transform` to specify processing options. This example
-creates a 300 by 300 crop with WebP output:
-
-.. literalinclude:: /examples/getting_started/transformations.py
-   :language: python
-   :start-at: from imgproxykit
-
-Options such as :class:`~imgproxykit.options.Resize` accept several arguments.
-Scalar options such as ``format`` can be passed directly as keyword arguments
-to :class:`~imgproxykit.Transform`.
-Imgproxy applies the processing options when serving the image.
-
-Sign URLs
----------
-
-For a server with signature checking enabled, supply both ``key`` and ``salt``
-when creating the client. Use the same hex-encoded values configured in the
-server's `IMGPROXY_KEY
-<https://docs.imgproxy.net/latest/configuration/options#url-signature>`__ and
-`IMGPROXY_SALT
-<https://docs.imgproxy.net/latest/configuration/options#url-signature>`__
-settings.
-
-.. literalinclude:: /examples/getting_started/signing.py
-   :language: python
-   :start-at: from imgproxykit
-
-The client replaces the ``unsafe`` marker with a signature generated from the
-URL path. Keep signing credentials in your application on the server.
-
-Reuse a transformation
-----------------------
-
-A :class:`~imgproxykit.Transform` is immutable and can be reused for different
-source images. Keep a transformation for each image size your application needs:
-
-.. literalinclude:: /examples/getting_started/reuse.py
-   :language: python
-   :start-at: from imgproxykit
-
-Both URLs use the same resize and format options for different source images.
+You've learned how to build image URLs and variants. Next, explore client
+configuration and more ways to compose transformations.
 
 Next steps
 ----------
 
 * :doc:`user-guide/client` — client configuration and signed URLs.
-* :doc:`user-guide/transformations` — working with transformations.
-* :doc:`user-guide/options` — processing options and server presets.
-* :doc:`api-reference/index` — complete signatures and available options.
+* :doc:`user-guide/transformations` — compose and reuse processing settings.
+* :doc:`user-guide/variants` — reusable sets and typed variant names.
