@@ -38,20 +38,21 @@ pip install imgproxykit
 Build a URL for a cropped WebP thumbnail:
 
 ```python
-from imgproxykit import Client, Transform
-from imgproxykit.options import Gravity, Resize
+>>> from imgproxykit import Client, Transform
+>>> from imgproxykit.options import Resize
 
-# Public URL of your imgproxy server.
-client = Client('https://imgproxy.example.com')
+>>> # Public URL of your imgproxy server.
+>>> client = Client('https://imgproxy.example.com')
 
-thumbnail = Transform(
-    Resize(width=300, height=300, mode='fill'),  # Pass typed option objects.
-    quality=80,  # Or scalar keywords, equivalent to Quality(80).
-    format='webp',
-)
+>>> thumbnail = Transform(
+...     Resize(width=300, height=300, mode='fill'),  # Pass typed option objects.
+...     quality=80,  # Or scalar keywords, equivalent to Quality(80).
+...     format='webp',
+... )
 
-source_url = 'https://originals.example.com/products/backpack.jpg'
-thumbnail_url = client.url(source=source_url, transform=thumbnail)
+>>> source_url = 'https://originals.example.com/products/backpack.jpg'
+>>> thumbnail_url = client.url(source=source_url, transform=thumbnail)
+
 ```
 
 `thumbnail_url` points to a 300×300 WebP thumbnail with smart cropping.
@@ -62,22 +63,23 @@ Imgproxy fetches and processes the original image when this URL is requested.
 Build variants by combining shared settings with different sizes:
 
 ```python
-from imgproxykit import Client, Transform
+>>> from imgproxykit import Client, Transform
 
-client = Client('https://imgproxy.example.com')
+>>> client = Client('https://imgproxy.example.com')
 
-# Share quality and output format across all variants.
-base = Transform(quality=85, format='webp')
-products = {
-    'small': Transform(*base.options, width=320),
-    'medium': Transform(*base.options, width=640),
-    'large': Transform(*base.options, width=1280),
-}
+>>> # Share quality and output format across all variants.
+>>> base = Transform(quality=85, format='webp')
+>>> products = {
+...     'small': Transform(*base.options, width=320),
+...     'medium': Transform(*base.options, width=640),
+...     'large': Transform(*base.options, width=1280),
+... }
 
-source_url = 'https://originals.example.com/products/backpack.jpg'
-# Build one URL per variant for the same source image.
-product_urls = client.variants(source=source_url, variants=products)
-small_url = product_urls['small']  # Access a URL by its variant name.
+>>> source_url = 'https://originals.example.com/products/backpack.jpg'
+>>> # Build one URL per variant for the same source image.
+>>> product_urls = client.variants(source=source_url, variants=products)
+>>> small_url = product_urls['small']  # Access a URL by its variant name.
+
 ```
 
 `product_urls` contains a URL for each size, all using the shared quality
