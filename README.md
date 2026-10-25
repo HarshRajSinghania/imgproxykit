@@ -14,9 +14,13 @@
 
 </div>
 
+URLs are generated locally without network requests; imgproxy fetches and
+processes the source image when requested.
+
 ## Features
 
 - [x] Fully typed and checked with `mypy`, `pyright`, `ty` and `pyrefly` in strict modes
+- [x] Signed URLs using your imgproxy server's key and salt
 - [x] Immutable, reusable transforms combining typed options and scalar arguments
 - [x] Variants: generate multiple image URLs from a reusable set of transforms
 - [x] Support for named presets configured on your imgproxy server
@@ -32,6 +36,13 @@ Requires **Python 3.12+** and a running [imgproxy](https://github.com/imgproxy/i
 ```bash
 pip install imgproxykit
 ```
+
+There are several included extras:
+
+- `'imgproxykit[django]'` provides [Django integration](https://imgproxykit.readthedocs.io/en/latest/pages/integrations/django.html)
+  with settings, shortcuts, and template tags
+- `'imgproxykit[fastapi]'` provides [FastAPI integration](https://imgproxykit.readthedocs.io/en/latest/pages/integrations/fastapi.html)
+  with client registration and dependency injection
 
 ## Examples
 
@@ -57,8 +68,15 @@ Build a URL for a cropped WebP thumbnail:
 
 ```
 
-`thumbnail_url` points to a 300×300 WebP thumbnail with smart cropping.
+The generated URL has this structure, with the source URL encoded as URL-safe Base64:
+
+```text
+https://imgproxy.example.com/unsafe/resize:fill:300:300/quality:80/format:webp/<encoded-source>
+```
+
+`thumbnail_url` points to a 300×300 WebP thumbnail cropped to fill the dimensions.
 Imgproxy fetches and processes the original image when this URL is requested.
+The example uses an unsigned URL, which requires the server to accept it.
 
 ### Variants
 
@@ -92,6 +110,8 @@ variants across your catalog.
 
 - Read the [documentation](https://imgproxykit.readthedocs.io/en/latest/)
   for client configuration, transformations, variants, and processing options.
+- Check the [changelog](https://imgproxykit.readthedocs.io/en/latest/pages/changelog.html)
+  for new features, fixes, and breaking changes.
 - Find published releases on [PyPI](https://pypi.org/project/imgproxykit/).
 
 ## Contributing
