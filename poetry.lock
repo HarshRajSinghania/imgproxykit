@@ -2151,18 +2151,19 @@ sphinxcontrib-serializinghtml = ">=1.1.9"
 
 [[package]]
 name = "sphinx-autodoc-typehints"
-version = "3.13.10"
-description = "Type hints (PEP 484) support for the Sphinx autodoc extension"
+version = "3.17.2"
+description = "Render Python type hints in Sphinx autodoc documentation"
 optional = false
 python-versions = ">=3.12"
 groups = ["docs"]
 files = [
-    {file = "sphinx_autodoc_typehints-3.13.10-py3-none-any.whl", hash = "sha256:ab8474dd7c2ef297488849214da29dd6da140ff458592ddc30188a3b070b31f9"},
-    {file = "sphinx_autodoc_typehints-3.13.10.tar.gz", hash = "sha256:f73464a09355a9f63b688a5b9093b1c0f56dc4854ea30ca326268e3d5a8e27cd"},
+    {file = "sphinx_autodoc_typehints-3.17.2-py3-none-any.whl", hash = "sha256:b0ad1f96503d69b63c2a1c043f12e2a727c9549e6503d4adbf2125dbf5ff50ed"},
+    {file = "sphinx_autodoc_typehints-3.17.2.tar.gz", hash = "sha256:de41ed4001f4818bb6d37c22fd10ee44a93e6c8e945c6c7e3984e28a9df87d1c"},
 ]
 
 [package.dependencies]
 sphinx = ">=9.1"
+typing-extensions = {version = ">=4.16", markers = "python_version < \"3.15\""}
 
 [[package]]
 name = "sphinx-iconify"
@@ -2429,6 +2430,18 @@ files = [
 ]
 
 [[package]]
+name = "types-docutils"
+version = "0.23.0.20260923"
+description = "Typing stubs for docutils"
+optional = false
+python-versions = ">=3.10"
+groups = ["dev"]
+files = [
+    {file = "types_docutils-0.23.0.20260923-py3-none-any.whl", hash = "sha256:62851b429db623e36853a4a189ce15a846e0636fe090c135d6dc5dd4f9108ef5"},
+    {file = "types_docutils-0.23.0.20260923.tar.gz", hash = "sha256:486d9054ea84410cc201a30c15759077a5f32234247cfc08aa7290ff2509f770"},
+]
+
+[[package]]
 name = "types-pyyaml"
 version = "6.0.12.20260906"
 description = "Typing stubs for PyYAML"
@@ -2685,4 +2698,4 @@ fastapi = ["fastapi"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "8b96e64bc573fcc64291c816fa7cb179e34d947c8261df512c2376b156a859f9"
+content-hash = "e20116550239ad928c7ddfb149112705252e36ccfd3b868b6436def6a41d8ee7"
