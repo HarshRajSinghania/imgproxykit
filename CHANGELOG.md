@@ -1,6 +1,6 @@
 # Version history
 
-We will follow [Semantic Versions](https://semver.org/) since `1.0.0` release.
+We will follow [Semantic Versioning](https://semver.org/) starting with the `1.0.0` release.
 While in `Development Status :: 3 - Alpha` - we will break
 all the things without any notices.
 

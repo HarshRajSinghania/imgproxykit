@@ -103,7 +103,7 @@ If you changed the documentation, run `make docs` as well.
 
 ## Other help
 
-You can contribute by spreading a word about this library.
+You can contribute by spreading the word about this library.
 It would also be a huge contribution to write
 a short article on how you are using this project.
 You can also share your best practices with us.
