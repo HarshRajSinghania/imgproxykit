@@ -9,7 +9,7 @@ source images and transformations.
 
 .. tip::
 
-    Start this container to try examples. Run and open a printed
+    Start this container to try examples. Run an example and open the printed
     URL in your browser.
 
     .. code-block:: bash

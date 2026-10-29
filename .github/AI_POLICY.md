@@ -8,7 +8,7 @@ AI Policy.
 
 Copied from
 https://github.com/astral-sh/.github/blob/main/AI_POLICY.md
-undert MIT license.
+under the MIT license.
 
 All the credit goes to the Astral team.
 -->
