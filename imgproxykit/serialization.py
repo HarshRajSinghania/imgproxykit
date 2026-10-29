@@ -42,7 +42,8 @@ class PathSerializer:
                 `IMGPROXY_ARGUMENTS_SEPARATOR
                 <https://docs.imgproxy.net/latest/configuration/options#miscellaneous>`__.
             short_option_name: Use short aliases when available, otherwise
-                full names. Defaults to ``False``.
+                full names. Required for direct construction; ``Client``
+                passes ``False`` by default.
 
         """
         self._arguments_separator = arguments_separator

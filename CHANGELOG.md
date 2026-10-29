@@ -24,6 +24,17 @@ but with a deprecation period.
 
 - Removed `imgproxykit.types.OptionType`. Processing option names now use
   `str`, allowing custom options to define their own protocol names.
+- `PathSerializer` now requires the `short_option_name` keyword-only argument.
+  Direct construction must pass it explicitly:
+
+  ```python
+  PathSerializer(arguments_separator=':', short_option_name=False)
+  ```
+
+  Custom serializers used as `Client.path_serializer_cls` must accept
+  `short_option_name` (and `arguments_separator`) in their constructor,
+  as `Client` passes both. The previous constructor signature is no longer valid.
+  #80
 
 ## 0.4.0
 
