@@ -38,9 +38,9 @@ smoke: ## Check package imports (SMOKE_EXTRAS='django drf fastapi' for integrati
 	$(POETRY) run python -c 'from imgproxykit.integrations import *'
 	for extra in $(SMOKE_EXTRAS); do \
 	  case "$$extra" in \
-	    django) $(POETRY) run python -c 'from import imgproxykit.integrations.django import *' ;; \
-	    drf) $(POETRY) run python -c 'from imgproxykit.integrations.drf import *' ;; \
-	    fastapi) $(POETRY) run python -c 'from imgproxykit.integrations.fastapi import *' ;; \
+	    django) $(POETRY) run python -c 'from imgproxykit.integrations.django import *' || exit 1 ;; \
+	    drf) $(POETRY) run python -c 'from imgproxykit.integrations.drf import *' || exit 1 ;; \
+	    fastapi) $(POETRY) run python -c 'from imgproxykit.integrations.fastapi import *' || exit 1 ;; \
 	  esac; \
 	done
 
